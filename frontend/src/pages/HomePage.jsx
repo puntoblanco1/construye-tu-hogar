@@ -26,7 +26,7 @@ const HomePage = () => {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-32">
           <h1 className="text-5xl md:text-7xl font-bold text-[#d4a650] mb-6">{t.hero.title}</h1>
           <p className="text-xl md:text-2xl text-white mb-4 max-w-3xl mx-auto">{t.hero.subtitle}</p>
-          <p className="text-base md:text-lg text-[#d4a650] mb-8 max-w-3xl mx-auto">Professional Project Management Firm - Save the developer's profit with expert legal and engineering services in Spain</p>
+          <p className="text-base md:text-lg text-[#d4a650] mb-8 max-w-3xl mx-auto">Professional Project Management Firm - Save the developer&apos;s profit with expert legal and engineering services in Spain</p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
             <a href="#journey">
