@@ -100,3 +100,11 @@ body {
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
+
+/* Hide Made with Emergent badge */
+a[href*="emergent"] img[alt*="Made with"],
+a[href*="emergent.sh"],
+div[class*="made-with"],
+div[class*="powered-by"] {
+    display: none !important;
+}
