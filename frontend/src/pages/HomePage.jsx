@@ -119,50 +119,57 @@ const HomePage = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {journeyCards.map((card) => {
+            {journeyCards.map((card, index) => {
               const Icon = card.icon;
+              const paths = [
+                '/journey/choose-neighbors',
+                '/journey/legal-recovery',
+                '/journey/hospitality-assets',
+                '/journey/senior-living'
+              ];
               return (
-                <Card 
-                  key={card.id}
-                  className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 cursor-pointer"
-                >
-                  <div className="relative h-64">
-                    <img 
-                      src={card.image} 
-                      alt={card.title}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className={`absolute inset-0 bg-gradient-to-br ${card.color} group-hover:opacity-90 transition-opacity duration-300`}></div>
-                    
-                    <div className="absolute top-4 left-4">
-                      <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                        <Icon className="w-6 h-6 text-white" />
+                <Link key={card.id} to={paths[index]}>
+                  <Card 
+                    className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 cursor-pointer h-full"
+                  >
+                    <div className="relative h-64">
+                      <img 
+                        src={card.image} 
+                        alt={card.title}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className={`absolute inset-0 bg-gradient-to-br ${card.color} group-hover:opacity-90 transition-opacity duration-300`}></div>
+                      
+                      <div className="absolute top-4 left-4">
+                        <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                          <Icon className="w-6 h-6 text-white" />
+                        </div>
+                      </div>
+                      
+                      <div className="absolute top-4 right-4">
+                        <Badge className="bg-white text-gray-900 font-semibold px-3 py-1 text-xs">
+                          {card.badge}
+                        </Badge>
                       </div>
                     </div>
-                    
-                    <div className="absolute top-4 right-4">
-                      <Badge className="bg-white text-gray-900 font-semibold px-3 py-1 text-xs">
-                        {card.badge}
-                      </Badge>
-                    </div>
-                  </div>
 
-                  <div className="p-6 bg-white">
-                    <p className="text-xs font-bold text-[#d4a650] mb-2 tracking-wider">
-                      {card.category}
-                    </p>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">
-                      {card.title}
-                    </h3>
-                    <p className="text-sm text-gray-600 mb-4 line-clamp-3">
-                      {card.description}
-                    </p>
-                    <Button className="w-full bg-[#0a1628] hover:bg-[#0a1628]/90 text-white font-semibold py-2 rounded-lg transition-all duration-300 flex items-center justify-center space-x-2">
-                      <span>{card.button}</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </Button>
-                  </div>
-                </Card>
+                    <div className="p-6 bg-white">
+                      <p className="text-xs font-bold text-[#d4a650] mb-2 tracking-wider">
+                        {card.category}
+                      </p>
+                      <h3 className="text-xl font-bold text-gray-900 mb-3">
+                        {card.title}
+                      </h3>
+                      <p className="text-sm text-gray-600 mb-4 line-clamp-3">
+                        {card.description}
+                      </p>
+                      <Button className="w-full bg-[#0a1628] hover:bg-[#0a1628]/90 text-white font-semibold py-2 rounded-lg transition-all duration-300 flex items-center justify-center space-x-2">
+                        <span>{card.button}</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  </Card>
+                </Link>
               );
             })}
           </div>
