@@ -30,14 +30,9 @@ const Footer = () => {
             <h3 className="text-white font-semibold mb-4">{t.footer.quickLinks}</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/#journey" className="text-sm hover:text-[#d4a650] transition-colors">
-                  {t.nav.yourJourney}
-                </Link>
-              </li>
-              <li>
-                <Link to="/#projects" className="text-sm hover:text-[#d4a650] transition-colors">
+                <a href="/#projects" className="text-sm hover:text-[#d4a650] transition-colors">
                   {t.nav.ourProjects}
-                </Link>
+                </a>
               </li>
               <li>
                 <Link to="/about" className="text-sm hover:text-[#d4a650] transition-colors">
