@@ -13,11 +13,8 @@ const Footer = () => {
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
-                <svg viewBox="0 0 24 24" className="w-6 h-6 text-[#0a1628]" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M3 21h18M3 10h18M12 3l9 7-9-7-9 7 9-7z" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M6 10v11M18 10v11M10 14h4M10 18h4" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center p-1">
+                <img src="/logo.png" alt="Logo" className="w-full h-full object-contain" />
               </div>
               <span className="text-lg font-bold text-white">
                 <span className="text-[#d4a650]">CONSTRUYE</span> TU HOGAR
