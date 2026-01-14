@@ -10,15 +10,15 @@ export const translations = {
     hero: {
       title: 'Build at Cost',
       subtitle: "We don't sell houses; we manage your construction project.",
-      description: "Professional Project Management Firm. Save the developer's profit with expert legal and engineering services in Spain.",
+      description: 'Professional Project Management Firm - Save the developer\'s profit with expert legal and engineering services in Spain',
       startJourney: 'Start Your Journey',
       learnMore: 'Learn More',
-      stat1: 'Up to 50%',
-      stat1Sub: 'Potential Savings',
-      stat2: 'Direct Cost',
-      stat2Sub: 'Model',
-      stat3: '100%',
-      stat3Sub: 'Transparency'
+      stat1: 'Legal Security',
+      stat1Sub: 'Your investment protected',
+      stat2: 'Complete Legal Management',
+      stat2Sub: 'Full compliance with the law',
+      stat3: 'Zero Risk',
+      stat3Sub: 'Maximum peace of mind for the client'
     },
     journey: {
       sectionTitle: 'YOUR JOURNEY',
