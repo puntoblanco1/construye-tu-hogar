@@ -47,18 +47,12 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link 
-              to="/#journey" 
-              className="text-gray-300 hover:text-[#d4a650] transition-colors text-sm font-medium"
-            >
-              {t.nav.yourJourney}
-            </Link>
-            <Link 
-              to="/#projects" 
+            <a 
+              href="/#projects" 
               className="text-gray-300 hover:text-[#d4a650] transition-colors text-sm font-medium"
             >
               {t.nav.ourProjects}
-            </Link>
+            </a>
             <Link 
               to="/about" 
               className="text-gray-300 hover:text-[#d4a650] transition-colors text-sm font-medium"
