@@ -184,10 +184,10 @@ const HomePage = () => {
               {t.projects.sectionTitle}
             </p>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              {t.projects.heading}
+              Nuestros Proyectos
             </h2>
             <p className="text-lg text-gray-400 max-w-3xl mx-auto">
-              {t.projects.subheading}
+              Descubre nuestros proyectos en desarrollo
             </p>
           </div>
 
