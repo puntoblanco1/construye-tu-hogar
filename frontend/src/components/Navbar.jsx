@@ -162,7 +162,7 @@ const Navbar = () => {
             </div>
             <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>
               <Button className="w-full bg-[#d4a650] hover:bg-[#c49640] text-[#0a1628] font-semibold py-2 mt-2">
-                {t.nav.startYourJourney}
+                {t.nav.contact}
               </Button>
             </Link>
           </div>
