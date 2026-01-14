@@ -105,6 +105,12 @@ body {
 a[href*="emergent"] img[alt*="Made with"],
 a[href*="emergent.sh"],
 div[class*="made-with"],
-div[class*="powered-by"] {
+div[class*="powered-by"],
+[class*="emergent-badge"],
+div[style*="position: fixed"][style*="bottom"],
+div[style*="position: fixed"][style*="right"],
+iframe[src*="emergent"] {
     display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
 }
