@@ -7,6 +7,10 @@ import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
+import ChooseNeighborsPage from "./pages/ChooseNeighborsPage";
+import LegalRecoveryPage from "./pages/LegalRecoveryPage";
+import HospitalityAssetsPage from "./pages/HospitalityAssetsPage";
+import RetirementOasisPage from "./pages/RetirementOasisPage";
 import { Toaster } from "./components/ui/toaster";
 
 function App() {
@@ -19,6 +23,10 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/journey/choose-neighbors" element={<ChooseNeighborsPage />} />
+            <Route path="/journey/legal-recovery" element={<LegalRecoveryPage />} />
+            <Route path="/journey/hospitality-assets" element={<HospitalityAssetsPage />} />
+            <Route path="/journey/senior-living" element={<RetirementOasisPage />} />
           </Routes>
           <Footer />
           <Toaster />
