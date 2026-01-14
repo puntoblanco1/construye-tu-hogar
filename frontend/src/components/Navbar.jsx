@@ -122,20 +122,13 @@ const Navbar = () => {
       {mobileMenuOpen && (
         <div className="md:hidden bg-[#0a1628] border-t border-gray-700">
           <div className="px-4 py-4 space-y-3">
-            <Link 
-              to="/#journey" 
-              onClick={() => setMobileMenuOpen(false)}
-              className="block text-gray-300 hover:text-[#d4a650] transition-colors py-2"
-            >
-              {t.nav.yourJourney}
-            </Link>
-            <Link 
-              to="/#projects" 
+            <a 
+              href="/#projects" 
               onClick={() => setMobileMenuOpen(false)}
               className="block text-gray-300 hover:text-[#d4a650] transition-colors py-2"
             >
               {t.nav.ourProjects}
-            </Link>
+            </a>
             <Link 
               to="/about" 
               onClick={() => setMobileMenuOpen(false)}
