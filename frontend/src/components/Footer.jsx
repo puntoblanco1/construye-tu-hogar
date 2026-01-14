@@ -13,9 +13,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center p-1">
-                <img src="/logo.png" alt="Logo" className="w-full h-full object-contain" />
-              </div>
+              <img src="/logo.png" alt="Logo" className="w-12 h-12 object-contain" />
               <span className="text-lg font-bold text-white">
                 <span className="text-[#d4a650]">CONSTRUYE</span> TU HOGAR
               </span>
