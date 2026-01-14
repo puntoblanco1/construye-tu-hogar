@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Users, CheckCircle, Shield, Award, ArrowRight } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
+import JourneyForm from '../components/JourneyForm';
+import { spanishCities } from '../data/cities';
+import { 
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '../components/ui/select';
+import { Input } from '../components/ui/input';
+import { Label } from '../components/ui/label';
+import { RadioGroup, RadioGroupItem } from '../components/ui/radio-group';
+import { useToast } from '../hooks/use-toast';
 
 const ChooseNeighborsPage = () => {
   const { t } = useLanguage();
