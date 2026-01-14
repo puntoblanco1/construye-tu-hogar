@@ -1,163 +1,39 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { TrendingUp, CheckCircle, DollarSign, Users, ArrowRight } from 'lucide-react';
+import React, { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { Button } from '../components/ui/button';
-import { Card } from '../components/ui/card';
+import JourneyForm from '../components/JourneyForm';
+import { spanishCities } from '../data/cities';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
+import { Input } from '../components/ui/input';
+import { Label } from '../components/ui/label';
+import { useToast } from '../hooks/use-toast';
 
 const HospitalityAssetsPage = () => {
-  const { t } = useLanguage();
-  const journey = t.journey.card3;
+  const { language } = useLanguage();
+  const { toast } = useToast();
+  const [formData, setFormData] = useState({ investorType: '', investmentPath: '', city: '', goal: '', cycle: '', fullName: '', email: '', whatsapp: '', countryCode: '+34' });
+
+  const ftxt = language === 'en' ? { step1: 'Investor Type', step2: 'Investment Path', step3: 'Goal & Cycle', step4: 'Contact', typeLabel: 'Select Type', individual: 'Individual Investor', company: 'Company/Group', cooperative: 'Investment Cooperative', pathLabel: 'Investment Type', apartments: 'Tourist Apartments', hotel: 'Rural Hotel', building: 'Building for Tourism', events: 'Event Space', glamping: 'Glamping', cityLabel: 'Select City', goalLabel: 'Investment Goal', yield: 'High Operating Yield', preservation: 'Long-term Asset Preservation', cycleLabel: 'Investment Cycle (Years)', fullNameLabel: 'Full Name', emailLabel: 'Email', whatsappLabel: 'WhatsApp Number', submit: 'Submit via WhatsApp' } : language === 'es' ? { step1: 'Tipo de Inversor', step2: 'Camino de Inversión', step3: 'Objetivo y Ciclo', step4: 'Contacto', typeLabel: 'Seleccionar Tipo', individual: 'Inversor Individual', company: 'Empresa/Grupo', cooperative: 'Cooperativa de Inversión', pathLabel: 'Tipo de Inversión', apartments: 'Apartamentos Turísticos', hotel: 'Hotel Rural', building: 'Edificio para Turismo', events: 'Espacio para Eventos', glamping: 'Glamping', cityLabel: 'Seleccionar Ciudad', goalLabel: 'Objetivo de Inversión', yield: 'Alto Rendimiento Operativo', preservation: 'Preservación de Activos a Largo Plazo', cycleLabel: 'Ciclo de Inversión (Años)', fullNameLabel: 'Nombre Completo', emailLabel: 'Correo Electrónico', whatsappLabel: 'Número de WhatsApp', submit: 'Enviar por WhatsApp' } : { step1: 'نوع المستثمر', step2: 'مسار الاستثمار', step3: 'الهدف والدورة', step4: 'التواصل', typeLabel: 'اختر النوع', individual: 'مستثمر فردي', company: 'شركة/مجموعة', cooperative: 'تعاونية استثمارية', pathLabel: 'نوع الاستثمار', apartments: 'شقق سياحية', hotel: 'فندق ريفي', building: 'مبنى سياحي', events: 'مساحة للفعاليات', glamping: 'غلامبينغ', cityLabel: 'اختر المدينة', goalLabel: 'هدف الاستثمار', yield: 'عائد تشغيلي مرتفع', preservation: 'حفظ الأصول طويل الأمد', cycleLabel: 'دورة الاستثمار (سنوات)', fullNameLabel: 'الاسم الكامل', emailLabel: 'البريد الإلكتروني', whatsappLabel: 'رقم الواتساب', submit: 'إرسال عبر الواتساب' };
+
+  const stepLabels = [ftxt.step1, ftxt.step2, ftxt.step3, ftxt.step4];
+
+  const handleSubmit = () => {
+    const message = `*Hospitality & Assets*\n\nType: ${formData.investorType}\nPath: ${formData.investmentPath}\nCity: ${formData.city}\nGoal: ${formData.goal}\nCycle: ${formData.cycle} years\nName: ${formData.fullName}\nEmail: ${formData.email}\nWhatsApp: ${formData.countryCode}${formData.whatsapp}`;
+    window.open(`https://wa.me/34123456789?text=${encodeURIComponent(message)}`, '_blank');
+    toast({ title: "Success!", description: "Opening WhatsApp..." });
+  };
 
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative py-32 bg-gradient-to-br from-green-900 via-green-800 to-green-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center text-white">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-white/10 backdrop-blur-sm rounded-full mb-6">
-              <TrendingUp className="w-10 h-10" />
-            </div>
-            <p className="text-green-200 font-semibold text-sm tracking-widest mb-4">
-              {journey.category}
-            </p>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              {journey.title}
-            </h1>
-            <p className="text-xl text-green-100 max-w-3xl mx-auto">
-              {journey.description}
-            </p>
-            <div className="mt-8">
-              <span className="inline-block bg-white text-green-900 font-bold px-6 py-3 rounded-full text-lg">
-                {journey.badge}
-              </span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Investment Options */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-center mb-12">Investment Opportunities</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <Card className="p-8 hover:shadow-xl transition-all duration-300">
-              <h3 className="text-2xl font-bold mb-4">Tourism Rentals</h3>
-              <p className="text-gray-600 mb-6">
-                Build properties designed for short-term tourist rentals in Valencia's growing tourism market.
-              </p>
-              <div className="space-y-3">
-                {[
-                  'Prime tourist locations',
-                  'High seasonal occupancy',
-                  'Premium nightly rates',
-                  'Full management services available'
-                ].map((item, index) => (
-                  <div key={index} className="flex items-center space-x-3">
-                    <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
-                    <span className="text-gray-700">{item}</span>
-                  </div>
-                ))}
-              </div>
-            </Card>
-            <Card className="p-8 hover:shadow-xl transition-all duration-300">
-              <h3 className="text-2xl font-bold mb-4">Long-Term Rentals</h3>
-              <p className="text-gray-600 mb-6">
-                Develop residential properties for stable, long-term rental income in Valencia's rental market.
-              </p>
-              <div className="space-y-3">
-                {[
-                  'Steady monthly income',
-                  'Lower management overhead',
-                  'Professional tenant placement',
-                  'Legal compliance support'
-                ].map((item, index) => (
-                  <div key={index} className="flex items-center space-x-3">
-                    <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
-                    <span className="text-gray-700">{item}</span>
-                  </div>
-                ))}
-              </div>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* ROI Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-center mb-12">Expected Returns</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="p-8 text-center">
-              <DollarSign className="w-12 h-12 text-green-600 mx-auto mb-4" />
-              <div className="text-4xl font-bold text-green-600 mb-2">8-12%</div>
-              <div className="text-gray-600">Annual ROI</div>
-            </Card>
-            <Card className="p-8 text-center">
-              <TrendingUp className="w-12 h-12 text-green-600 mx-auto mb-4" />
-              <div className="text-4xl font-bold text-green-600 mb-2">15-20%</div>
-              <div className="text-gray-600">Capital Appreciation</div>
-            </Card>
-            <Card className="p-8 text-center">
-              <Users className="w-12 h-12 text-green-600 mx-auto mb-4" />
-              <div className="text-4xl font-bold text-green-600 mb-2">85%+</div>
-              <div className="text-gray-600">Average Occupancy</div>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Image Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <img 
-                src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=80" 
-                alt="Hospitality Assets" 
-                className="rounded-2xl shadow-2xl"
-              />
-            </div>
-            <div className="space-y-6">
-              <h2 className="text-4xl font-bold text-gray-900">Why Valencia?</h2>
-              <p className="text-lg text-gray-600">
-                Valencia is one of Spain's fastest-growing tourism and residential markets, offering excellent opportunities for property investment.
-              </p>
-              <div className="space-y-4">
-                {[
-                  'Growing tourism industry',
-                  'Strong rental demand',
-                  'Favorable property prices',
-                  'Excellent climate year-round',
-                  'Rich culture and infrastructure',
-                  'Strong international connectivity'
-                ].map((item, index) => (
-                  <div key={index} className="flex items-start space-x-3">
-                    <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0 mt-1" />
-                    <p className="text-gray-700">{item}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-green-900 text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold mb-6">Ready to Build Your Investment Portfolio?</h2>
-          <p className="text-xl text-green-100 mb-8">
-            Contact our investment team to discuss opportunities and start building your hospitality asset portfolio in Spain.
-          </p>
-          <Link to="/contact">
-            <Button className="bg-[#d4a650] hover:bg-[#c49640] text-[#0a1628] font-semibold px-8 py-6 text-lg rounded-lg transition-all duration-300 hover:shadow-xl flex items-center mx-auto space-x-2">
-              <span>Discuss Investment Options</span>
-              <ArrowRight className="w-5 h-5" />
-            </Button>
-          </Link>
-        </div>
-      </section>
+    <div className="min-h-screen bg-gray-50 py-20">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="text-center mb-12"><h1 className="text-4xl font-bold text-gray-900 mb-4">Hospitality & Assets</h1></div>
+        <JourneyForm stepLabels={stepLabels}>
+          <div className="space-y-6"><h2 className="text-2xl font-bold mb-6">{ftxt.step1}</h2><div><Label>{ftxt.typeLabel}</Label><Select value={formData.investorType} onValueChange={(val) => setFormData({...formData, investorType: val})}><SelectTrigger><SelectValue /></SelectTrigger><SelectContent><SelectItem value="individual">{ftxt.individual}</SelectItem><SelectItem value="company">{ftxt.company}</SelectItem><SelectItem value="cooperative">{ftxt.cooperative}</SelectItem></SelectContent></Select></div></div>
+          <div className="space-y-6"><h2 className="text-2xl font-bold mb-6">{ftxt.step2}</h2><div><Label>{ftxt.pathLabel}</Label><Select value={formData.investmentPath} onValueChange={(val) => setFormData({...formData, investmentPath: val})}><SelectTrigger><SelectValue /></SelectTrigger><SelectContent><SelectItem value="apartments">{ftxt.apartments}</SelectItem><SelectItem value="hotel">{ftxt.hotel}</SelectItem><SelectItem value="building">{ftxt.building}</SelectItem><SelectItem value="events">{ftxt.events}</SelectItem><SelectItem value="glamping">{ftxt.glamping}</SelectItem></SelectContent></Select></div><div><Label>{ftxt.cityLabel}</Label><Select value={formData.city} onValueChange={(val) => setFormData({...formData, city: val})}><SelectTrigger><SelectValue /></SelectTrigger><SelectContent>{spanishCities.map(c => <SelectItem key={c} value={c}>{c}</SelectItem>)}</SelectContent></Select></div></div>
+          <div className="space-y-6"><h2 className="text-2xl font-bold mb-6">{ftxt.step3}</h2><div><Label>{ftxt.goalLabel}</Label><Select value={formData.goal} onValueChange={(val) => setFormData({...formData, goal: val})}><SelectTrigger><SelectValue /></SelectTrigger><SelectContent><SelectItem value="yield">{ftxt.yield}</SelectItem><SelectItem value="preservation">{ftxt.preservation}</SelectItem></SelectContent></Select></div><div><Label>{ftxt.cycleLabel}</Label><Select value={formData.cycle} onValueChange={(val) => setFormData({...formData, cycle: val})}><SelectTrigger><SelectValue /></SelectTrigger><SelectContent><SelectItem value="2">2</SelectItem><SelectItem value="3">3</SelectItem><SelectItem value="4">4</SelectItem><SelectItem value="5+">5+</SelectItem></SelectContent></Select></div></div>
+          <div className="space-y-6"><h2 className="text-2xl font-bold mb-6">{ftxt.step4}</h2><div><Label>{ftxt.fullNameLabel}</Label><Input value={formData.fullName} onChange={(e) => setFormData({...formData, fullName: e.target.value})} /></div><div><Label>{ftxt.emailLabel}</Label><Input type="email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} /></div><div><Label>{ftxt.whatsappLabel}</Label><div className="flex space-x-2"><Input className="w-24" value={formData.countryCode} onChange={(e) => setFormData({...formData, countryCode: e.target.value})} /><Input className="flex-1" value={formData.whatsapp} onChange={(e) => setFormData({...formData, whatsapp: e.target.value})} /></div></div><Button onClick={handleSubmit} className="w-full bg-green-600 hover:bg-green-700 text-white py-6">{ftxt.submit}</Button></div>
+        </JourneyForm>
+      </div>
     </div>
   );
 };
