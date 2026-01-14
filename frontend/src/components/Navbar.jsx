@@ -35,11 +35,8 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
-            <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center shadow-md">
-              <svg viewBox="0 0 24 24" className="w-8 h-8 text-[#0a1628]" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M3 21h18M3 10h18M12 3l9 7-9-7-9 7 9-7z" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M6 10v11M18 10v11M10 14h4M10 18h4" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+            <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center shadow-md p-1">
+              <img src="/logo.png" alt="Logo" className="w-full h-full object-contain" />
             </div>
             <div className="flex flex-col">
               <span className="text-xl font-bold text-white tracking-tight">
