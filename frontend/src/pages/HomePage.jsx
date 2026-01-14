@@ -31,7 +31,7 @@ const HomePage = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
             <a href="#journey">
               <Button className="bg-[#d4a650] hover:bg-[#c49640] text-[#0a1628] font-semibold px-8 py-6 text-lg rounded-lg transition-all duration-300 hover:shadow-xl hover:scale-105 flex items-center space-x-2">
-                <span>Start Your Journey</span>
+                <span>{t.hero.startJourney}</span>
                 <ArrowRight className="w-5 h-5" />
               </Button>
             </a>
