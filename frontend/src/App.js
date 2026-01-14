@@ -11,6 +11,7 @@ import ChooseNeighborsPage from "./pages/ChooseNeighborsPage";
 import LegalRecoveryPage from "./pages/LegalRecoveryPage";
 import HospitalityAssetsPage from "./pages/HospitalityAssetsPage";
 import RetirementOasisPage from "./pages/RetirementOasisPage";
+import ProjectDetailsPage from "./pages/ProjectDetailsPage";
 import { Toaster } from "./components/ui/toaster";
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
             <Route path="/journey/legal-recovery" element={<LegalRecoveryPage />} />
             <Route path="/journey/hospitality-assets" element={<HospitalityAssetsPage />} />
             <Route path="/journey/senior-living" element={<RetirementOasisPage />} />
+            <Route path="/project/37-villa-collection" element={<ProjectDetailsPage />} />
           </Routes>
           <Footer />
           <Toaster />
