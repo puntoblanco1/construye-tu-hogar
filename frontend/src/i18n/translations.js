@@ -112,15 +112,15 @@ export const translations = {
     hero: {
       title: 'Construye al Costo',
       subtitle: 'No vendemos casas; gestionamos tu proyecto de construcción.',
-      description: 'Empresa Profesional de Gestión de Proyectos. Ahorra el beneficio del promotor con servicios legales y de ingeniería expertos en España.',
+      description: 'Empresa Profesional de Gestión de Proyectos - Ahorra el beneficio del promotor con servicios legales y de ingeniería expertos en España',
       startJourney: 'Comienza Tu Viaje',
       learnMore: 'Saber Más',
-      stat1: 'Hasta 50%',
-      stat1Sub: 'Ahorros Potenciales',
-      stat2: 'Costo Directo',
-      stat2Sub: 'Modelo',
-      stat3: '100%',
-      stat3Sub: 'Transparencia'
+      stat1: 'Seguridad Jurídica',
+      stat1Sub: 'Tu inversión protegida',
+      stat2: 'Gestión Legal Completa',
+      stat2Sub: 'Cumplimiento total de la ley',
+      stat3: 'Riesgo Cero',
+      stat3Sub: 'Máxima tranquilidad para el cliente'
     },
     journey: {
       sectionTitle: 'TU VIAJE',
