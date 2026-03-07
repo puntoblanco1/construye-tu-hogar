@@ -13,6 +13,8 @@ import HospitalityAssetsPage from "./pages/HospitalityAssetsPage";
 import RetirementOasisPage from "./pages/RetirementOasisPage";
 import ProjectDetailsPage from "./pages/ProjectDetailsPage";
 import FAQPage from "./pages/FAQPage";
+import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
+import TermsPage from "./pages/TermsPage";
 import { Toaster } from "./components/ui/toaster";
 
 function App() {
@@ -31,6 +33,8 @@ function App() {
             <Route path="/journey/senior-living" element={<RetirementOasisPage />} />
             <Route path="/project/37-villa-collection" element={<ProjectDetailsPage />} />
             <Route path="/faq" element={<FAQPage />} />
+            <Route path="/privacy" element={<PrivacyPolicyPage />} />
+            <Route path="/terms" element={<TermsPage />} />
           </Routes>
           <Footer />
           <Toaster />
