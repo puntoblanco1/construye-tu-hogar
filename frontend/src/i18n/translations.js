@@ -7,6 +7,7 @@ const baseTranslations = {
       ourProjects: 'Our Projects',
       aboutUs: 'About Us',
       contact: 'Contact',
+      faq: 'FAQ',
       startYourJourney: 'Start Your Journey'
     },
     hero: {
@@ -109,6 +110,7 @@ const baseTranslations = {
       ourProjects: 'Nuestros Proyectos',
       aboutUs: 'Sobre Nosotros',
       contact: 'Contacto',
+      faq: 'Preguntas Frecuentes',
       startYourJourney: 'Comienza Tu Viaje'
     },
     hero: {
@@ -211,6 +213,7 @@ const baseTranslations = {
       ourProjects: 'مشاريعنا',
       aboutUs: 'من نحن',
       contact: 'اتصل بنا',
+      faq: 'الأسئلة الشائعة',
       startYourJourney: 'ابدأ رحلتك'
     },
     hero: {
