@@ -308,3 +308,10 @@ const baseTranslations = {
     }
   }
 };
+
+// Merge base translations with FAQ translations
+export const translations = {
+  en: { ...baseTranslations.en, ...faqTranslations.en },
+  es: { ...baseTranslations.es, ...faqTranslations.es },
+  ar: { ...baseTranslations.ar, ...faqTranslations.ar }
+};
