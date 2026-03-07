@@ -42,6 +42,28 @@ const Footer = () => {
                   {t.nav.contact}
                 </Link>
               </li>
+              <li>
+                <Link to="/faq" className="text-sm hover:text-[#d4a650] transition-colors">
+                  {t.nav.faq || 'FAQ'}
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Legal Links */}
+          <div>
+            <h3 className="text-white font-semibold mb-4">{language === 'ar' ? 'قانوني' : language === 'es' ? 'Legal' : 'Legal'}</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link to="/privacy" className="text-sm hover:text-[#d4a650] transition-colors">
+                  {language === 'ar' ? 'سياسة الخصوصية' : language === 'es' ? 'Política de Privacidad' : 'Privacy Policy'}
+                </Link>
+              </li>
+              <li>
+                <Link to="/terms" className="text-sm hover:text-[#d4a650] transition-colors">
+                  {language === 'ar' ? 'شروط الخدمة' : language === 'es' ? 'Términos de Servicio' : 'Terms of Service'}
+                </Link>
+              </li>
             </ul>
           </div>
 
