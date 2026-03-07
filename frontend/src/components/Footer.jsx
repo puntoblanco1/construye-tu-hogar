@@ -4,7 +4,7 @@ import { Facebook, Instagram, Linkedin, Mail, Phone, MapPin } from 'lucide-react
 import { useLanguage } from '../context/LanguageContext';
 
 const Footer = () => {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
 
   return (
     <footer className="bg-[#0a1628] text-gray-300">
