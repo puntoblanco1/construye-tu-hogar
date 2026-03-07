@@ -30,7 +30,7 @@ const ChooseNeighborsPage = () => {
 
   const handleSubmit = () => {
     const message = `*Choose Neighbors*\n\nGroup: ${formData.groupType}\nCity: ${formData.city}\nArea: ${formData.minArea}-${formData.maxArea}m²\nRooms: ${formData.totalRooms}\nName: ${formData.fullName}\nEmail: ${formData.email}\nWhatsApp: ${formData.countryCode}${formData.whatsapp}`;
-    window.open(`https://wa.me/34123456789?text=${encodeURIComponent(message)}`, '_blank');
+    window.open(`https://wa.me/34673365300?text=${encodeURIComponent(message)}`, '_blank');
     toast({ title: "Success!", description: "Opening WhatsApp..." });
   };
 

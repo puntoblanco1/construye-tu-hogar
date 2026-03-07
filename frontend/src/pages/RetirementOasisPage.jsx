@@ -29,7 +29,7 @@ const RetirementOasisPage = () => {
 
   const handleSubmit = () => {
     const msg = `*Senior Living*\n\nCountry: ${formData.country}\nCity: ${formData.city}\nLifestyle: ${formData.lifestyle}\nGarden: ${formData.garden}m²\nRooms: ${formData.totalRooms}\nFloors: ${formData.floors}\nFinishing: ${formData.finishing}\nName: ${formData.fullName}\nEmail: ${formData.email}\nWhatsApp: ${formData.countryCode}${formData.whatsapp}`;
-    window.open(`https://wa.me/34123456789?text=${encodeURIComponent(msg)}`, '_blank');
+    window.open(`https://wa.me/34673365300?text=${encodeURIComponent(msg)}`, '_blank');
     toast({ title: "Success!", description: "Opening WhatsApp..." });
   };
 

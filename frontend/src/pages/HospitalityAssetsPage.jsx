@@ -27,7 +27,7 @@ const HospitalityAssetsPage = () => {
 
   const handleSubmit = () => {
     const msg = `*Hospitality*\n\nType: ${formData.investorType}\nPath: ${formData.investmentPath}\nCity: ${formData.city}\nGoal: ${formData.goal}\nCycle: ${formData.cycle}\nName: ${formData.fullName}\nEmail: ${formData.email}\nWhatsApp: ${formData.countryCode}${formData.whatsapp}`;
-    window.open(`https://wa.me/34123456789?text=${encodeURIComponent(msg)}`, '_blank');
+    window.open(`https://wa.me/34673365300?text=${encodeURIComponent(msg)}`, '_blank');
     toast({ title: "Success!", description: "Opening WhatsApp..." });
   };
 

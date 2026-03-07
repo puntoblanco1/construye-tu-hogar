@@ -28,7 +28,7 @@ const LegalRecoveryPage = () => {
 
   const handleSubmit = () => {
     const msg = `*Legal Recovery*\n\nType: ${formData.groupType}\nCity: ${formData.city}\nPurpose: ${formData.purpose}\nBudget: ${formData.budget}\nName: ${formData.fullName}\nEmail: ${formData.email}\nWhatsApp: ${formData.countryCode}${formData.whatsapp}`;
-    window.open(`https://wa.me/34123456789?text=${encodeURIComponent(msg)}`, '_blank');
+    window.open(`https://wa.me/34673365300?text=${encodeURIComponent(msg)}`, '_blank');
     toast({ title: "Success!", description: "Opening WhatsApp..." });
   };
 
