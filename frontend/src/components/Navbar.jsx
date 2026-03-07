@@ -58,6 +58,12 @@ const Navbar = () => {
               {t.nav.aboutUs}
             </Link>
             <Link 
+              to="/faq" 
+              className="text-gray-300 hover:text-[#d4a650] transition-colors text-sm font-medium"
+            >
+              {t.nav.faq || 'FAQ'}
+            </Link>
+            <Link 
               to="/contact" 
               className="text-gray-300 hover:text-[#d4a650] transition-colors text-sm font-medium"
             >
@@ -133,6 +139,13 @@ const Navbar = () => {
               className="block text-gray-300 hover:text-[#d4a650] transition-colors py-2"
             >
               {t.nav.aboutUs}
+            </Link>
+            <Link 
+              to="/faq" 
+              onClick={() => setMobileMenuOpen(false)}
+              className="block text-gray-300 hover:text-[#d4a650] transition-colors py-2"
+            >
+              {t.nav.faq || 'FAQ'}
             </Link>
             <Link 
               to="/contact" 
