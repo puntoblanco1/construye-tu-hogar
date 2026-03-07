@@ -12,6 +12,7 @@ import LegalRecoveryPage from "./pages/LegalRecoveryPage";
 import HospitalityAssetsPage from "./pages/HospitalityAssetsPage";
 import RetirementOasisPage from "./pages/RetirementOasisPage";
 import ProjectDetailsPage from "./pages/ProjectDetailsPage";
+import FAQPage from "./pages/FAQPage";
 import { Toaster } from "./components/ui/toaster";
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
             <Route path="/journey/hospitality-assets" element={<HospitalityAssetsPage />} />
             <Route path="/journey/senior-living" element={<RetirementOasisPage />} />
             <Route path="/project/37-villa-collection" element={<ProjectDetailsPage />} />
+            <Route path="/faq" element={<FAQPage />} />
           </Routes>
           <Footer />
           <Toaster />

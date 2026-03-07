@@ -1,4 +1,6 @@
-export const translations = {
+import { faqTranslations } from './faqTranslations';
+
+const baseTranslations = {
   en: {
     nav: {
       yourJourney: 'Your Journey',
