@@ -142,28 +142,28 @@ const Navbar = () => {
           <div className="px-4 py-4 space-y-3">
             <a 
               href="/#projects" 
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={handleLinkClick}
               className="block text-gray-300 hover:text-[#d4a650] transition-colors py-2"
             >
               {t.nav.ourProjects}
             </a>
             <Link 
               to="/about" 
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={handleLinkClick}
               className="block text-gray-300 hover:text-[#d4a650] transition-colors py-2"
             >
               {t.nav.aboutUs}
             </Link>
             <Link 
               to="/faq" 
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={handleLinkClick}
               className="block text-gray-300 hover:text-[#d4a650] transition-colors py-2"
             >
               {t.nav.faq || 'FAQ'}
             </Link>
             <Link 
               to="/contact" 
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={handleLinkClick}
               className="block text-gray-300 hover:text-[#d4a650] transition-colors py-2"
             >
               {t.nav.contact}
@@ -185,7 +185,7 @@ const Navbar = () => {
                 </button>
               ))}
             </div>
-            <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>
+            <Link to="/contact" onClick={handleLinkClick}>
               <Button className="w-full bg-[#d4a650] hover:bg-[#c49640] text-[#0a1628] font-semibold py-2 mt-2">
                 {t.nav.contact}
               </Button>
