@@ -4,30 +4,52 @@
 Clone the website `https://buildathome.preview.emergentagent.com/` with pixel-perfect multi-page design, multi-language support (AR, EN, ES), RTL support for Arabic, and additional features.
 
 ## Architecture
-- **Frontend-only** React application (no backend in active use)
-- React + React Router + TailwindCSS + shadcn/ui
+- **Full-stack** React frontend + FastAPI backend + MongoDB
+- React Router + TailwindCSS + shadcn/ui
 - Custom i18n context for AR/EN/ES translations
 - Leaflet + OpenStreetMap for interactive map
+- JWT session-based auth (email+password + Google OAuth)
 - Static JSON data from parsed Excel file (1,791 properties)
 
 ## What's Been Implemented
 
-### Core Website (Previous Sessions)
-- Homepage with hero, journey cards, projects section
+### Core Website
+- Homepage with hero, journey cards, projects section, **interactive map section**
 - Four Journey pages with multi-step forms (WhatsApp submission)
-- About page
-- Contact page (WhatsApp + Email)
-- FAQ page with search/filter (trilingual)
-- Privacy Policy & Terms of Service pages
-- GDPR Cookie Banner
-- Full i18n (AR, EN, ES) with RTL support
-- Logo and social media links customized
-- Scroll-to-top on navigation
+- About, Contact, FAQ, Privacy Policy, Terms pages
+- GDPR Cookie Banner, full i18n (AR, EN, ES) with RTL
 
-### New Features (March 10, 2025)
-- **Interactive Map Page** (`/opportunities`): 1,791 property markers from Excel data displayed on Leaflet/OpenStreetMap with marker clustering, search, and filters (region, province, use type)
-- **Floating WhatsApp Button**: Persistent green button on all pages linking to +34 673 365 300 with tooltip on hover
-- Navigation links for Opportunities added to Navbar (desktop + mobile) and Footer
+### Map & Property Features (March 10, 2025)
+- Interactive map on homepage (`#opportunities` anchor) with 1,791 markers
+- Filters: region, municipality, price range
+- Search by municipality/address
+- Marker clustering for performance
+- Property popups with details, save button, WhatsApp contact
+
+### Auth & Favorites System (March 10, 2025)
+- Email+password registration and login
+- Google OAuth via Emergent Auth
+- Session-based auth with httpOnly cookies
+- Favorites/likes system - heart button on property popups
+- Auth modal appears when non-logged user tries to save
+- Favorites page (`/favorites`) with saved properties and WhatsApp contact
+- User menu in navbar (avatar, favorites count, logout)
+- Floating WhatsApp button on all pages
+
+## API Endpoints
+- `POST /api/auth/register` - Register with name, email, password
+- `POST /api/auth/login` - Login with email, password
+- `POST /api/auth/session` - Google OAuth session exchange
+- `GET /api/auth/me` - Get current user
+- `POST /api/auth/logout` - Logout
+- `POST /api/favorites/{property_id}` - Add favorite
+- `DELETE /api/favorites/{property_id}` - Remove favorite
+- `GET /api/favorites` - List user's favorite property IDs
+
+## DB Collections
+- `users` - user_id, email, name, picture, password_hash, auth_provider
+- `user_sessions` - user_id, session_token, expires_at
+- `favorites` - user_id, property_id, created_at
 
 ## Prioritized Backlog
 
@@ -36,22 +58,6 @@ Clone the website `https://buildathome.preview.emergentagent.com/` with pixel-pe
 - Team section/page
 
 ### P2 - Medium Priority
-- Backend & Database integration (save form submissions to MongoDB)
 - Interactive Savings Calculator
 - Blog/Content section
 - Newsletter signup form
-
-## Key Files
-- `/app/frontend/src/pages/OpportunitiesPage.jsx` - Map page
-- `/app/frontend/src/components/FloatingWhatsApp.jsx` - WhatsApp button
-- `/app/frontend/src/data/properties.json` - 1,791 property records
-- `/app/frontend/src/i18n/translations.js` - All translations
-- `/app/frontend/src/App.js` - Routes and layout
-- `/app/frontend/src/components/Navbar.jsx` - Navigation
-- `/app/frontend/src/components/Footer.jsx` - Footer
-
-## Technical Notes
-- WhatsApp number: +34 673 365 300
-- Map uses free Leaflet + OpenStreetMap (no API key needed)
-- Marker clustering via react-leaflet-cluster for performance with 1,791+ markers
-- Property data parsed from `SUELOS Y WIPS ESPANA.xlsx` (both sheets)
