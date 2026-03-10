@@ -61,9 +61,9 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/opportunities" onClick={scrollToTop} className="text-sm hover:text-[#d4a650] transition-colors">
+                <a href="/#opportunities" className="text-sm hover:text-[#d4a650] transition-colors">
                   {t.nav.opportunities || 'Opportunities'}
-                </Link>
+                </a>
               </li>
             </ul>
           </div>
