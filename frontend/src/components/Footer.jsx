@@ -5,19 +5,32 @@ import { useLanguage } from '../context/LanguageContext';
 
 const Footer = () => {
   const { language, t } = useLanguage();
+  const isRTL = language === 'ar';
+
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
+
+  const legalText = {
+    en: { title: 'Legal', privacy: 'Privacy Policy', terms: 'Terms of Service' },
+    es: { title: 'Legal', privacy: 'Política de Privacidad', terms: 'Términos de Servicio' },
+    ar: { title: 'قانوني', privacy: 'سياسة الخصوصية', terms: 'شروط الخدمة' }
+  };
+
+  const legal = legalText[language] || legalText.en;
 
   return (
-    <footer className="bg-[#0a1628] text-gray-300">
+    <footer className="bg-[#0a1628] text-gray-300" dir={isRTL ? 'rtl' : 'ltr'}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <div className="flex items-center space-x-3">
+            <Link to="/" onClick={scrollToTop} className={`flex items-center ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'}`}>
               <img src="/logo.png" alt="Logo" className="w-12 h-12 object-contain" />
               <span className="text-lg font-bold text-white">
                 <span className="text-[#d4a650]">CONSTRUYE</span> TU HOGAR
               </span>
-            </div>
+            </Link>
             <p className="text-sm text-gray-400">
               {t.footer.tagline}
             </p>
@@ -33,17 +46,17 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <Link to="/about" className="text-sm hover:text-[#d4a650] transition-colors">
+                <Link to="/about" onClick={scrollToTop} className="text-sm hover:text-[#d4a650] transition-colors">
                   {t.nav.aboutUs}
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="text-sm hover:text-[#d4a650] transition-colors">
+                <Link to="/contact" onClick={scrollToTop} className="text-sm hover:text-[#d4a650] transition-colors">
                   {t.nav.contact}
                 </Link>
               </li>
               <li>
-                <Link to="/faq" className="text-sm hover:text-[#d4a650] transition-colors">
+                <Link to="/faq" onClick={scrollToTop} className="text-sm hover:text-[#d4a650] transition-colors">
                   {t.nav.faq || 'FAQ'}
                 </Link>
               </li>
@@ -52,16 +65,16 @@ const Footer = () => {
 
           {/* Legal Links */}
           <div>
-            <h3 className="text-white font-semibold mb-4">{language === 'ar' ? 'قانوني' : language === 'es' ? 'Legal' : 'Legal'}</h3>
+            <h3 className="text-white font-semibold mb-4">{legal.title}</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/privacy" className="text-sm hover:text-[#d4a650] transition-colors">
-                  {language === 'ar' ? 'سياسة الخصوصية' : language === 'es' ? 'Política de Privacidad' : 'Privacy Policy'}
+                <Link to="/privacy" onClick={scrollToTop} className="text-sm hover:text-[#d4a650] transition-colors">
+                  {legal.privacy}
                 </Link>
               </li>
               <li>
-                <Link to="/terms" className="text-sm hover:text-[#d4a650] transition-colors">
-                  {language === 'ar' ? 'شروط الخدمة' : language === 'es' ? 'Términos de Servicio' : 'Terms of Service'}
+                <Link to="/terms" onClick={scrollToTop} className="text-sm hover:text-[#d4a650] transition-colors">
+                  {legal.terms}
                 </Link>
               </li>
             </ul>
@@ -71,15 +84,15 @@ const Footer = () => {
           <div>
             <h3 className="text-white font-semibold mb-4">{t.nav.contact}</h3>
             <ul className="space-y-3">
-              <li className="flex items-start space-x-3">
+              <li className={`flex items-start ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'}`}>
                 <MapPin className="w-5 h-5 text-[#d4a650] flex-shrink-0 mt-0.5" />
                 <span className="text-sm">Valencia, Spain</span>
               </li>
-              <li className="flex items-center space-x-3">
+              <li className={`flex items-center ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'}`}>
                 <Phone className="w-5 h-5 text-[#d4a650] flex-shrink-0" />
-                <span className="text-sm">+34 673 365 300</span>
+                <span className="text-sm" dir="ltr">+34 673 365 300</span>
               </li>
-              <li className="flex items-center space-x-3">
+              <li className={`flex items-center ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'}`}>
                 <Mail className="w-5 h-5 text-[#d4a650] flex-shrink-0" />
                 <span className="text-sm">info@construyetuhogar.es</span>
               </li>
@@ -89,7 +102,7 @@ const Footer = () => {
           {/* Social Media */}
           <div>
             <h3 className="text-white font-semibold mb-4">{t.footer.followUs}</h3>
-            <div className="flex space-x-4">
+            <div className={`flex ${isRTL ? 'space-x-reverse space-x-4' : 'space-x-4'}`}>
               <a 
                 href="https://www.facebook.com/share/17eoof5B7R/?mibextid=wwXIfr" 
                 target="_blank"
