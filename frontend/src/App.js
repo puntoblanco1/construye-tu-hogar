@@ -16,6 +16,8 @@ import ProjectDetailsPage from "./pages/ProjectDetailsPage";
 import FAQPage from "./pages/FAQPage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import TermsPage from "./pages/TermsPage";
+import OpportunitiesPage from "./pages/OpportunitiesPage";
+import FloatingWhatsApp from "./components/FloatingWhatsApp";
 import { Toaster } from "./components/ui/toaster";
 
 function App() {
@@ -36,8 +38,10 @@ function App() {
             <Route path="/faq" element={<FAQPage />} />
             <Route path="/privacy" element={<PrivacyPolicyPage />} />
             <Route path="/terms" element={<TermsPage />} />
+            <Route path="/opportunities" element={<OpportunitiesPage />} />
           </Routes>
           <Footer />
+          <FloatingWhatsApp />
           <CookieBanner />
           <Toaster />
         </div>

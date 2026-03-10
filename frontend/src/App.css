@@ -130,3 +130,40 @@ iframe[src*="emergent"] {
     visibility: hidden !important;
     opacity: 0 !important;
 }
+
+
+/* Leaflet Map Styles */
+.leaflet-container {
+    font-family: inherit;
+    z-index: 1;
+}
+
+.property-popup .leaflet-popup-content-wrapper {
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    padding: 0;
+}
+
+.property-popup .leaflet-popup-content {
+    margin: 12px 14px;
+}
+
+.property-popup .leaflet-popup-tip {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Marker Cluster Overrides */
+.marker-cluster-small,
+.marker-cluster-medium,
+.marker-cluster-large {
+    background-color: rgba(212, 166, 80, 0.25) !important;
+}
+
+.marker-cluster-small div,
+.marker-cluster-medium div,
+.marker-cluster-large div {
+    background-color: #d4a650 !important;
+    color: #0a1628 !important;
+    font-weight: 700;
+    font-size: 13px;
+}

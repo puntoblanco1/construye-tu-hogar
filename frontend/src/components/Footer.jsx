@@ -60,6 +60,11 @@ const Footer = () => {
                   {t.nav.faq || 'FAQ'}
                 </Link>
               </li>
+              <li>
+                <Link to="/opportunities" onClick={scrollToTop} className="text-sm hover:text-[#d4a650] transition-colors">
+                  {t.nav.opportunities || 'Opportunities'}
+                </Link>
+              </li>
             </ul>
           </div>
 
