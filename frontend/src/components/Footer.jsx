@@ -26,7 +26,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="space-y-4">
             <Link to="/" onClick={scrollToTop} className={`flex items-center ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'}`}>
-              <img src="/logo.png" alt="Logo" className="w-12 h-12 object-contain" />
+              <img src="/logo.png" alt="Logo" className="w-12 h-12 object-contain rounded-full" />
               <span className="text-lg font-bold text-white">
                 <span className="text-[#d4a650]">CONSTRUYE</span> TU HOGAR
               </span>

@@ -62,7 +62,7 @@ const Navbar = () => {
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link to="/" onClick={handleLinkClick} className={`flex items-center ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'}`}>
-              <img src="/logo.png" alt="Logo" className="w-14 h-14 object-contain" />
+              <img src="/logo.png" alt="Logo" className="w-14 h-14 object-contain rounded-full" />
               <div className="flex flex-col">
                 <span className="text-xl font-bold text-white tracking-tight">
                   <span className="text-[#d4a650]">CONSTRUYE</span> TU HOGAR
