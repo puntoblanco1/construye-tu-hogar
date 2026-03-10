@@ -10,6 +10,7 @@ const Navbar = () => {
   const [showLangMenu, setShowLangMenu] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const isRTL = language === 'ar';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,6 +20,11 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   const languages = [
     { code: 'en', name: 'English', flag: '🇬🇧' },
     { code: 'es', name: 'Español', flag: '🇪🇸' },
@@ -27,14 +33,19 @@ const Navbar = () => {
 
   const currentLang = languages.find(l => l.code === language) || languages[0];
 
+  const handleLinkClick = () => {
+    window.scrollTo(0, 0);
+    setMobileMenuOpen(false);
+  };
+
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       isScrolled ? 'bg-[#0a1628]/95 backdrop-blur-md shadow-lg' : 'bg-[#0a1628]'
-    }`}>
+    }`} dir={isRTL ? 'rtl' : 'ltr'}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3">
+          <Link to="/" onClick={handleLinkClick} className={`flex items-center ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'}`}>
             <img src="/logo.png" alt="Logo" className="w-14 h-14 object-contain" />
             <div className="flex flex-col">
               <span className="text-xl font-bold text-white tracking-tight">
@@ -44,7 +55,7 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className={`hidden md:flex items-center ${isRTL ? 'space-x-reverse space-x-8' : 'space-x-8'}`}>
             <a 
               href="/#projects" 
               className="text-gray-300 hover:text-[#d4a650] transition-colors text-sm font-medium"
@@ -52,19 +63,22 @@ const Navbar = () => {
               {t.nav.ourProjects}
             </a>
             <Link 
-              to="/about" 
+              to="/about"
+              onClick={handleLinkClick}
               className="text-gray-300 hover:text-[#d4a650] transition-colors text-sm font-medium"
             >
               {t.nav.aboutUs}
             </Link>
             <Link 
-              to="/faq" 
+              to="/faq"
+              onClick={handleLinkClick}
               className="text-gray-300 hover:text-[#d4a650] transition-colors text-sm font-medium"
             >
               {t.nav.faq || 'FAQ'}
             </Link>
             <Link 
-              to="/contact" 
+              to="/contact"
+              onClick={handleLinkClick}
               className="text-gray-300 hover:text-[#d4a650] transition-colors text-sm font-medium"
             >
               {t.nav.contact}
@@ -72,11 +86,11 @@ const Navbar = () => {
           </div>
 
           {/* Language Selector & CTA */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className={`hidden md:flex items-center ${isRTL ? 'space-x-reverse space-x-4' : 'space-x-4'}`}>
             <div className="relative">
               <button
                 onClick={() => setShowLangMenu(!showLangMenu)}
-                className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors"
+                className={`flex items-center ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'} text-gray-300 hover:text-white transition-colors`}
               >
                 <Globe className="w-4 h-4" />
                 <span className="text-sm">{currentLang.flag}</span>
@@ -85,7 +99,7 @@ const Navbar = () => {
               </button>
               
               {showLangMenu && (
-                <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-lg shadow-xl py-2 border border-gray-200">
+                <div className={`absolute top-full ${isRTL ? 'left-0' : 'right-0'} mt-2 w-48 bg-white rounded-lg shadow-xl py-2 border border-gray-200`}>
                   {languages.map((lang) => (
                     <button
                       key={lang.code}
@@ -93,7 +107,7 @@ const Navbar = () => {
                         changeLanguage(lang.code);
                         setShowLangMenu(false);
                       }}
-                      className={`w-full px-4 py-2 text-left hover:bg-gray-100 transition-colors flex items-center space-x-3 ${
+                      className={`w-full px-4 py-2 text-${isRTL ? 'right' : 'left'} hover:bg-gray-100 transition-colors flex items-center ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'} ${
                         language === lang.code ? 'bg-gray-50' : ''
                       }`}
                     >
@@ -105,7 +119,7 @@ const Navbar = () => {
               )}
             </div>
             
-            <Link to="/contact">
+            <Link to="/contact" onClick={handleLinkClick}>
               <Button className="bg-[#d4a650] hover:bg-[#c49640] text-[#0a1628] font-semibold px-6 py-2 rounded-lg transition-all duration-300 hover:shadow-lg">
                 {t.nav.contact}
               </Button>
