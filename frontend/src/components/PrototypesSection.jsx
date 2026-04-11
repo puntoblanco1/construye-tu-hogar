@@ -188,9 +188,9 @@ const PrototypesSection = ({ selectable = false, onSelect, selectedId }) => {
                     ))}
                   </ul>
 
-                  {/* Compare Tour Button */}
+                  {/* Virtual Tour Button */}
                   <button
-                    onClick={() => setShowTour(true)}
+                    onClick={() => setShowTour(house.id)}
                     className="w-full mt-4 py-2.5 rounded-lg border-2 border-dashed border-[#d4a650]/40 hover:border-[#d4a650] text-[#d4a650] hover:bg-[#d4a650]/5 transition-all flex items-center justify-center gap-2 text-sm font-semibold"
                     data-testid={`tour-btn-${house.id}`}
                   >
@@ -222,7 +222,7 @@ const PrototypesSection = ({ selectable = false, onSelect, selectedId }) => {
       </div>
 
       {/* Virtual Tour Modal - All 3 plans compared */}
-      <VirtualTour isOpen={showTour} onClose={() => setShowTour(false)} />
+      <VirtualTour houseId={showTour} isOpen={!!showTour} onClose={() => setShowTour(null)} />
     </section>
   );
 };
