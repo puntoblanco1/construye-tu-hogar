@@ -118,6 +118,29 @@ code {
     transform: translateY(0) translateX(0) scale(1);
 }
 
+/* Parallax sections */
+.parallax-section {
+    position: relative;
+    overflow: hidden;
+}
+
+@supports (background-attachment: fixed) {
+    .parallax-section .bg-fixed {
+        background-attachment: fixed;
+    }
+}
+
+/* Loading screen bar animation */
+.loading-bar-animate {
+    animation: loadingBar 1.6s ease-in-out infinite;
+}
+
+@keyframes loadingBar {
+    0% { width: 0; margin-left: 0; }
+    50% { width: 100%; margin-left: 0; }
+    100% { width: 0; margin-left: 100%; }
+}
+
 @layer base {
     [data-debug-wrapper="true"] {
         display: contents !important;

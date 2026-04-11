@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { LanguageProvider } from "./context/LanguageContext";
@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import CookieBanner from "./components/CookieBanner";
 import FloatingWhatsApp from "./components/FloatingWhatsApp";
+import LoadingScreen from "./components/LoadingScreen";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
@@ -91,9 +92,13 @@ function AppRouter() {
 }
 
 function App() {
+  const [loading, setLoading] = useState(true);
+  const handleLoadFinish = useCallback(() => setLoading(false), []);
+
   return (
     <LanguageProvider>
       <AuthProvider>
+        {loading && <LoadingScreen onFinish={handleLoadFinish} />}
         <BrowserRouter>
           <div className="App">
             <AppRouter />

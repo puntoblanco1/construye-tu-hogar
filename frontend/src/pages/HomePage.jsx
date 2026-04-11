@@ -9,11 +9,29 @@ import MapSection from '../components/MapSection';
 import AuthModal from '../components/AuthModal';
 import PrototypesSection from '../components/PrototypesSection';
 import HeroCarousel from '../components/HeroCarousel';
+import ParallaxDivider from '../components/ParallaxDivider';
+import BlogSection from '../components/BlogSection';
 import { ScrollReveal } from '../hooks/useScrollReveal';
 
+const parallaxContent = {
+  en: {
+    divider1: { title: 'Build Your Dream Home', subtitle: 'Save up to 40% with our Build-at-Cost methodology' },
+    divider2: { title: 'Your Investment, Your Future', subtitle: 'Professional project management from planning to keys' },
+  },
+  es: {
+    divider1: { title: 'Construye Tu Casa de Ensueño', subtitle: 'Ahorra hasta un 40% con nuestra metodología de Construir al Costo' },
+    divider2: { title: 'Tu Inversión, Tu Futuro', subtitle: 'Gestión profesional de proyectos desde la planificación hasta las llaves' },
+  },
+  ar: {
+    divider1: { title: 'ابنِ منزل أحلامك', subtitle: 'وفّر حتى 40% مع منهجية البناء بالتكلفة' },
+    divider2: { title: 'استثمارك، مستقبلك', subtitle: 'إدارة مشاريع احترافية من التخطيط حتى التسليم' },
+  },
+};
+
 const HomePage = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [showAuth, setShowAuth] = useState(false);
+  const pc = parallaxContent[language] || parallaxContent.en;
 
   const journeyCards = [
     { id: 1, image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80', color: 'from-blue-600/80 to-blue-800/80', icon: Users, ...t.journey.card1 },
@@ -66,6 +84,14 @@ const HomePage = () => {
         </div>
       </section>
 
+      {/* Parallax Divider 1 */}
+      <ParallaxDivider index={0}>
+        <ScrollReveal animation="fade-up">
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">{pc.divider1.title}</h2>
+          <p className="text-lg md:text-xl text-[#d4a650]">{pc.divider1.subtitle}</p>
+        </ScrollReveal>
+      </ParallaxDivider>
+
       {/* House Prototypes */}
       <ScrollReveal animation="fade-up">
         <PrototypesSection />
@@ -75,6 +101,14 @@ const HomePage = () => {
       <ScrollReveal animation="fade-up">
         <MapSection onAuthRequired={() => setShowAuth(true)} />
       </ScrollReveal>
+
+      {/* Parallax Divider 2 */}
+      <ParallaxDivider index={1}>
+        <ScrollReveal animation="fade-up">
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">{pc.divider2.title}</h2>
+          <p className="text-lg md:text-xl text-[#d4a650]">{pc.divider2.subtitle}</p>
+        </ScrollReveal>
+      </ParallaxDivider>
 
       {/* Projects */}
       <section id="projects" className="py-20 bg-[#0a1628] text-white">
@@ -112,6 +146,9 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+
+      {/* Blog Section */}
+      <BlogSection />
 
       {/* Auth Modal */}
       <AuthModal isOpen={showAuth} onClose={() => setShowAuth(false)} defaultMode="register" />
