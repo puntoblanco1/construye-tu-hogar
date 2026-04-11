@@ -1,73 +1,39 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { Button } from './ui/button';
 
-const slides = [
-  {
-    image: 'https://images.unsplash.com/photo-1757264119016-7e6b568b810d?w=1920&q=85',
-    alt: 'Modern villa with pool',
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&q=85',
-    alt: 'Luxury Mediterranean home',
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1598635031829-4bfae29d33eb?w=1920&q=85',
-    alt: 'Contemporary Spanish villa',
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1757439402101-55d1da381e70?w=1920&q=85',
-    alt: 'Resort villa with mountains',
-  },
-];
-
 const HeroCarousel = () => {
   const { t } = useLanguage();
-  const [current, setCurrent] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-
-  const goTo = useCallback((index) => {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
-    setCurrent(index);
-    setTimeout(() => setIsTransitioning(false), 900);
-  }, [isTransitioning]);
-
-  const next = useCallback(() => {
-    goTo((current + 1) % slides.length);
-  }, [current, goTo]);
-
-  const prev = useCallback(() => {
-    goTo((current - 1 + slides.length) % slides.length);
-  }, [current, goTo]);
-
-  useEffect(() => {
-    const timer = setInterval(next, 6000);
-    return () => clearInterval(timer);
-  }, [next]);
+  const videoRef = useRef(null);
+  const [videoLoaded, setVideoLoaded] = useState(false);
 
   return (
     <section data-testid="hero-carousel" className="relative h-screen w-full overflow-hidden">
-      {/* Background slides */}
-      {slides.map((slide, i) => (
-        <div
-          key={i}
-          className="absolute inset-0 transition-opacity duration-[1200ms] ease-in-out"
-          style={{ opacity: i === current ? 1 : 0, zIndex: i === current ? 1 : 0 }}
-        >
-          <img
-            src={slide.image}
-            alt={slide.alt}
-            className="w-full h-full object-cover"
-            loading={i === 0 ? 'eager' : 'lazy'}
-          />
-        </div>
-      ))}
+      {/* Poster / fallback image */}
+      <div
+        className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${videoLoaded ? 'opacity-0' : 'opacity-100'}`}
+        style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&q=80)' }}
+      />
+
+      {/* Background video */}
+      <video
+        ref={videoRef}
+        data-testid="hero-video"
+        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
+        onCanPlay={() => setVideoLoaded(true)}
+      >
+        <source src="/videos/hero-video.mp4" type="video/mp4" />
+      </video>
 
       {/* Overlay */}
-      <div className="absolute inset-0 z-[2] bg-gradient-to-b from-[#0a1628]/70 via-[#0a1628]/50 to-[#0a1628]/80" />
+      <div className="absolute inset-0 z-[2] bg-gradient-to-b from-[#0a1628]/60 via-[#0a1628]/40 to-[#0a1628]/75" />
 
       {/* Content */}
       <div className="absolute inset-0 z-[3] flex items-center justify-center">
@@ -127,39 +93,11 @@ const HeroCarousel = () => {
         </div>
       </div>
 
-      {/* Navigation arrows */}
-      <button
-        data-testid="hero-carousel-prev"
-        onClick={prev}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-[4] w-12 h-12 rounded-full bg-black/30 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white hover:bg-black/50 transition-all duration-300 hover:scale-110"
-        aria-label="Previous slide"
-      >
-        <ChevronLeft className="w-6 h-6" />
-      </button>
-      <button
-        data-testid="hero-carousel-next"
-        onClick={next}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-[4] w-12 h-12 rounded-full bg-black/30 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white hover:bg-black/50 transition-all duration-300 hover:scale-110"
-        aria-label="Next slide"
-      >
-        <ChevronRight className="w-6 h-6" />
-      </button>
-
-      {/* Dot indicators */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-[4] flex items-center gap-3">
-        {slides.map((_, i) => (
-          <button
-            key={i}
-            data-testid={`hero-carousel-dot-${i}`}
-            onClick={() => goTo(i)}
-            className={`transition-all duration-500 rounded-full ${
-              i === current
-                ? 'w-10 h-3 bg-[#d4a650]'
-                : 'w-3 h-3 bg-white/40 hover:bg-white/70'
-            }`}
-            aria-label={`Go to slide ${i + 1}`}
-          />
-        ))}
+      {/* Scroll indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-[4] flex flex-col items-center gap-2 animate-bounce">
+        <div className="w-6 h-10 border-2 border-white/40 rounded-full flex justify-center pt-2">
+          <div className="w-1.5 h-3 bg-[#d4a650] rounded-full animate-pulse" />
+        </div>
       </div>
     </section>
   );
