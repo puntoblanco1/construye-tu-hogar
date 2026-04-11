@@ -8,7 +8,7 @@ import { Card } from '../components/ui/card';
 import MapSection from '../components/MapSection';
 import AuthModal from '../components/AuthModal';
 import PrototypesSection from '../components/PrototypesSection';
-import ShowcaseCarousel from '../components/ShowcaseCarousel';
+import HeroCarousel from '../components/HeroCarousel';
 
 const HomePage = () => {
   const { t } = useLanguage();
@@ -23,38 +23,8 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Hero */}
-      <section className="relative min-h-screen flex items-center justify-center">
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1599995903128-531fc7fb694b?crop=entropy&cs=srgb&fm=jpg&q=85)' }}>
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0a1628]/90 via-[#0a1628]/85 to-[#0a1628]/90"></div>
-        </div>
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-32">
-          <h1 className="text-5xl md:text-7xl font-bold text-[#d4a650] mb-6">{t.hero.title}</h1>
-          <p className="text-xl md:text-2xl text-white mb-4 max-w-3xl mx-auto">{t.hero.subtitle}</p>
-          <p className="text-base md:text-lg text-[#d4a650] mb-8 max-w-3xl mx-auto">{t.hero.description}</p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-            <a href="#journey">
-              <Button className="bg-[#d4a650] hover:bg-[#c49640] text-[#0a1628] font-semibold px-8 py-6 text-lg rounded-lg transition-all duration-300 hover:shadow-xl hover:scale-105 flex items-center space-x-2">
-                <span>{t.hero.startJourney}</span>
-                <ArrowRight className="w-5 h-5" />
-              </Button>
-            </a>
-            <Link to="/about">
-              <Button variant="outline" className="border-2 border-[#d4a650] text-[#d4a650] hover:bg-[#d4a650]/10 font-semibold px-8 py-6 text-lg rounded-lg transition-all duration-300">
-                {t.hero.learnMore}
-              </Button>
-            </Link>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <div className="bg-[#0a1628]/60 backdrop-blur-md border border-gray-700 rounded-xl p-6 hover:border-[#d4a650] transition-all"><div className="text-4xl font-bold text-[#d4a650] mb-2">{t.hero.stat1}</div><div className="text-gray-300">{t.hero.stat1Sub}</div></div>
-            <div className="bg-[#0a1628]/60 backdrop-blur-md border border-gray-700 rounded-xl p-6 hover:border-[#d4a650] transition-all"><div className="text-4xl font-bold text-[#d4a650] mb-2">{t.hero.stat2}</div><div className="text-gray-300">{t.hero.stat2Sub}</div></div>
-            <div className="bg-[#0a1628]/60 backdrop-blur-md border border-gray-700 rounded-xl p-6 hover:border-[#d4a650] transition-all"><div className="text-4xl font-bold text-[#d4a650] mb-2">{t.hero.stat3}</div><div className="text-gray-300">{t.hero.stat3Sub}</div></div>
-          </div>
-        </div>
-      </section>
-
-      {/* Showcase Carousel */}
-      <ShowcaseCarousel />
+      {/* Hero Carousel */}
+      <HeroCarousel />
 
       {/* Journey */}
       <section id="journey" className="py-20 bg-white">
