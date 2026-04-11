@@ -14,42 +14,28 @@ Clone the website `https://buildathome.preview.emergentagent.com/` with pixel-pe
 ## What's Been Implemented
 
 ### Core Website
-- Homepage with hero, journey cards, projects section, **interactive map section**
+- Homepage with hero, journey cards, house prototypes, map section, projects
 - Four Journey pages with multi-step forms (WhatsApp submission)
 - About, Contact, FAQ, Privacy Policy, Terms pages
 - GDPR Cookie Banner, full i18n (AR, EN, ES) with RTL
 
+### House Prototypes (March 11, 2025)
+- 3 prototype cards (Casa 1: 75m²/1bed, Casa 2: 88m²/2bed, Casa 3: 128m²/3bed)
+- Shown on homepage (display only) and ChooseNeighbors page (selectable)
+- Detailed room breakdowns with areas
+- Selection included in WhatsApp form submission
+- Casa 2 marked as "Most Popular"
+
 ### Map & Property Features (March 10, 2025)
-- Interactive map on homepage (`#opportunities` anchor) with 1,791 markers
+- Interactive map on homepage with 1,791 markers
 - Filters: region, municipality, price range
-- Search by municipality/address
-- Marker clustering for performance
-- Property popups with details, save button, WhatsApp contact
+- Marker clustering, property popups with save/contact
 
 ### Auth & Favorites System (March 10, 2025)
-- Email+password registration and login
-- Google OAuth via Emergent Auth
-- Session-based auth with httpOnly cookies
-- Favorites/likes system - heart button on property popups
-- Auth modal appears when non-logged user tries to save
-- Favorites page (`/favorites`) with saved properties and WhatsApp contact
-- User menu in navbar (avatar, favorites count, logout)
+- Email+password + Google OAuth registration/login
+- Favorites/likes system with auth modal for non-logged users
+- Favorites page, user menu in navbar
 - Floating WhatsApp button on all pages
-
-## API Endpoints
-- `POST /api/auth/register` - Register with name, email, password
-- `POST /api/auth/login` - Login with email, password
-- `POST /api/auth/session` - Google OAuth session exchange
-- `GET /api/auth/me` - Get current user
-- `POST /api/auth/logout` - Logout
-- `POST /api/favorites/{property_id}` - Add favorite
-- `DELETE /api/favorites/{property_id}` - Remove favorite
-- `GET /api/favorites` - List user's favorite property IDs
-
-## DB Collections
-- `users` - user_id, email, name, picture, password_hash, auth_provider
-- `user_sessions` - user_id, session_token, expires_at
-- `favorites` - user_id, property_id, created_at
 
 ## Prioritized Backlog
 
@@ -61,3 +47,5 @@ Clone the website `https://buildathome.preview.emergentagent.com/` with pixel-pe
 - Interactive Savings Calculator
 - Blog/Content section
 - Newsletter signup form
+- Scroll animations (AOS-style)
+- Animated number counters

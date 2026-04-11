@@ -7,6 +7,7 @@ import { Badge } from '../components/ui/badge';
 import { Card } from '../components/ui/card';
 import MapSection from '../components/MapSection';
 import AuthModal from '../components/AuthModal';
+import PrototypesSection from '../components/PrototypesSection';
 
 const HomePage = () => {
   const { t } = useLanguage();
@@ -85,6 +86,9 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+
+      {/* House Prototypes */}
+      <PrototypesSection />
 
       {/* Map Section */}
       <MapSection onAuthRequired={() => setShowAuth(true)} />
