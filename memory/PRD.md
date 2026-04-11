@@ -9,43 +9,35 @@ Clone the website `https://buildathome.preview.emergentagent.com/` with pixel-pe
 - Custom i18n context for AR/EN/ES translations
 - Leaflet + OpenStreetMap for interactive map
 - JWT session-based auth (email+password + Google OAuth)
-- Static JSON data from parsed Excel file (1,791 properties)
 
 ## What's Been Implemented
 
 ### Core Website
-- Homepage with hero, journey cards, house prototypes, map section, projects
+- Homepage with hero, journey cards, house prototypes, virtual tours, map section, projects
 - Four Journey pages with multi-step forms (WhatsApp submission)
 - About, Contact, FAQ, Privacy Policy, Terms pages
 - GDPR Cookie Banner, full i18n (AR, EN, ES) with RTL
 
-### House Prototypes (March 11, 2025)
+### Virtual Tour (Latest)
+- Interactive SVG floor plans for all 3 casa prototypes (accurate dimensions from PDF)
+- Clickable rooms open full-screen panoramic image viewer
+- Drag-to-pan + auto-pan animation for immersive experience
+- Room details: name, area, ceiling height (2.70m)
+- Accessible from "Virtual Tour" button on each prototype card
+- Works on both homepage (display) and ChooseNeighbors page (selectable)
+
+### House Prototypes
 - 3 prototype cards (Casa 1: 75m²/1bed, Casa 2: 88m²/2bed, Casa 3: 128m²/3bed)
-- Shown on homepage (display only) and ChooseNeighbors page (selectable)
-- Detailed room breakdowns with areas
-- Selection included in WhatsApp form submission
-- Casa 2 marked as "Most Popular"
+- Detailed room breakdowns, "Most Popular" badge on Casa 2
 
-### Map & Property Features (March 10, 2025)
-- Interactive map on homepage with 1,791 markers
-- Filters: region, municipality, price range
-- Marker clustering, property popups with save/contact
+### Map & Property Features
+- 1,791 property markers with clustering, filters (region, municipality, price)
+- Save/favorite system with auth modal
 
-### Auth & Favorites System (March 10, 2025)
-- Email+password + Google OAuth registration/login
-- Favorites/likes system with auth modal for non-logged users
-- Favorites page, user menu in navbar
-- Floating WhatsApp button on all pages
+### Auth & Favorites
+- Email+password + Google OAuth
+- Favorites page, user menu, floating WhatsApp button
 
 ## Prioritized Backlog
-
-### P1 - High Priority
-- Testimonials section on homepage
-- Team section/page
-
-### P2 - Medium Priority
-- Interactive Savings Calculator
-- Blog/Content section
-- Newsletter signup form
-- Scroll animations (AOS-style)
-- Animated number counters
+### P1: Testimonials, Team section
+### P2: Savings Calculator, Blog, Newsletter, Scroll animations

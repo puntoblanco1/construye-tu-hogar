@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Bed, Bath, Ruler, Maximize, ChevronRight, Check } from 'lucide-react';
+import { Bed, Bath, Ruler, Maximize, ChevronRight, Check, Eye } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { Button } from './ui/button';
+import VirtualTour from './VirtualTour';
 
 const HOUSES = [
   {
@@ -61,6 +62,7 @@ const content = {
     select: 'Choose This Model',
     selected: 'Selected',
     popular: 'Most Popular',
+    tour: 'Virtual Tour',
     casa: 'Casa',
   },
   es: {
@@ -75,6 +77,7 @@ const content = {
     select: 'Elegir Este Modelo',
     selected: 'Seleccionado',
     popular: 'M\u00E1s Popular',
+    tour: 'Tour Virtual',
     casa: 'Casa',
   },
   ar: {
@@ -89,6 +92,7 @@ const content = {
     select: '\u0627\u062E\u062A\u0631 \u0647\u0630\u0627 \u0627\u0644\u0646\u0645\u0648\u0630\u062C',
     selected: '\u062A\u0645 \u0627\u0644\u0627\u062E\u062A\u064A\u0627\u0631',
     popular: '\u0627\u0644\u0623\u0643\u062B\u0631 \u0634\u0639\u0628\u064A\u0629',
+    tour: '\u062C\u0648\u0644\u0629 \u0627\u0641\u062A\u0631\u0627\u0636\u064A\u0629',
     casa: '\u0643\u0627\u0633\u0627',
   }
 };
@@ -98,6 +102,7 @@ const PrototypesSection = ({ selectable = false, onSelect, selectedId }) => {
   const isRTL = language === 'ar';
   const txt = content[language] || content.en;
   const [hoveredId, setHoveredId] = useState(null);
+  const [tourHouseId, setTourHouseId] = useState(null);
 
   return (
     <section className="py-20 bg-white" dir={isRTL ? 'rtl' : 'ltr'} id="prototypes" data-testid="prototypes-section">
@@ -182,6 +187,16 @@ const PrototypesSection = ({ selectable = false, onSelect, selectedId }) => {
                       </li>
                     ))}
                   </ul>
+
+                  {/* Virtual Tour Button */}
+                  <button
+                    onClick={() => setTourHouseId(house.id)}
+                    className="w-full mt-4 py-2.5 rounded-lg border-2 border-dashed border-[#d4a650]/40 hover:border-[#d4a650] text-[#d4a650] hover:bg-[#d4a650]/5 transition-all flex items-center justify-center gap-2 text-sm font-semibold"
+                    data-testid={`tour-btn-${house.id}`}
+                  >
+                    <Eye className="w-4 h-4" />
+                    {txt.tour}
+                  </button>
                 </div>
 
                 {/* Action */}
@@ -205,6 +220,9 @@ const PrototypesSection = ({ selectable = false, onSelect, selectedId }) => {
           })}
         </div>
       </div>
+
+      {/* Virtual Tour Modal */}
+      <VirtualTour houseId={tourHouseId} isOpen={!!tourHouseId} onClose={() => setTourHouseId(null)} />
     </section>
   );
 };
