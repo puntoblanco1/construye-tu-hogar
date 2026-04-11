@@ -102,7 +102,7 @@ const PrototypesSection = ({ selectable = false, onSelect, selectedId }) => {
   const isRTL = language === 'ar';
   const txt = content[language] || content.en;
   const [hoveredId, setHoveredId] = useState(null);
-  const [tourHouseId, setTourHouseId] = useState(null);
+  const [showTour, setShowTour] = useState(false);
 
   return (
     <section className="py-20 bg-white" dir={isRTL ? 'rtl' : 'ltr'} id="prototypes" data-testid="prototypes-section">
@@ -188,9 +188,9 @@ const PrototypesSection = ({ selectable = false, onSelect, selectedId }) => {
                     ))}
                   </ul>
 
-                  {/* Virtual Tour Button */}
+                  {/* Compare Tour Button */}
                   <button
-                    onClick={() => setTourHouseId(house.id)}
+                    onClick={() => setShowTour(true)}
                     className="w-full mt-4 py-2.5 rounded-lg border-2 border-dashed border-[#d4a650]/40 hover:border-[#d4a650] text-[#d4a650] hover:bg-[#d4a650]/5 transition-all flex items-center justify-center gap-2 text-sm font-semibold"
                     data-testid={`tour-btn-${house.id}`}
                   >
@@ -221,8 +221,8 @@ const PrototypesSection = ({ selectable = false, onSelect, selectedId }) => {
         </div>
       </div>
 
-      {/* Virtual Tour Modal */}
-      <VirtualTour houseId={tourHouseId} isOpen={!!tourHouseId} onClose={() => setTourHouseId(null)} />
+      {/* Virtual Tour Modal - All 3 plans compared */}
+      <VirtualTour isOpen={showTour} onClose={() => setShowTour(false)} />
     </section>
   );
 };
