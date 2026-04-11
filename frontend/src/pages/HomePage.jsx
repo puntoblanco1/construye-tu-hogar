@@ -8,6 +8,7 @@ import { Card } from '../components/ui/card';
 import MapSection from '../components/MapSection';
 import AuthModal from '../components/AuthModal';
 import PrototypesSection from '../components/PrototypesSection';
+import ShowcaseCarousel from '../components/ShowcaseCarousel';
 
 const HomePage = () => {
   const { t } = useLanguage();
@@ -51,6 +52,9 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+
+      {/* Showcase Carousel */}
+      <ShowcaseCarousel />
 
       {/* Journey */}
       <section id="journey" className="py-20 bg-white">
