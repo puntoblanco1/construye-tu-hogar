@@ -13,7 +13,7 @@ Clone the website `https://property-hero-build.preview.emergentagent.com/` with 
 ## What's Been Implemented
 
 ### Core Website
-- Homepage with full-screen Hero Video (autoplay muted MP4 background, like bihomes.es), parallax dividers, blog section, journey cards, house prototypes, virtual tours, map section, projects
+- Homepage with 4-phase Video Hero (construction process: Foundation -> Building -> Details -> Dream Home, autoplay MP4 montage like bihomes.es), parallax dividers, blog section, journey cards, house prototypes, virtual tours, map section, projects
 - Four Journey pages with multi-step forms (WhatsApp submission)
 - About, Contact, FAQ, Privacy Policy, Terms pages
 - GDPR Cookie Banner, full i18n (AR, EN, ES) with RTL
