@@ -1,39 +1,115 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { Button } from './ui/button';
 
+const phases = [
+  { src: '/videos/build-phase1.mp4', poster: 'https://images.pexels.com/videos/34786623/pexels-photo-34786623.jpeg?w=1920' },
+  { src: '/videos/build-phase3.mp4', poster: 'https://images.pexels.com/videos/17506766/pexels-photo-17506766.jpeg?w=1920' },
+  { src: '/videos/build-phase2.mp4', poster: 'https://images.pexels.com/videos/35904584/pexels-photo-35904584.jpeg?w=1920' },
+  { src: '/videos/hero-video.mp4', poster: 'https://images.pexels.com/videos/17224771/architectural-design-architectural-designs-beautiful-home-beautiful-sunset-17224771.jpeg?w=1920' },
+];
+
+const phaseLabels = {
+  en: ['Foundation & Structure', 'Building Progress', 'Construction Details', 'Your Dream Home'],
+  es: ['Cimentación y Estructura', 'Avance de Obra', 'Detalles de Construcción', 'Tu Casa de Ensueño'],
+  ar: ['الأساسات والهيكل', 'تقدم البناء', 'تفاصيل البناء', 'منزل أحلامك'],
+};
+
 const HeroCarousel = () => {
-  const { t } = useLanguage();
-  const videoRef = useRef(null);
-  const [videoLoaded, setVideoLoaded] = useState(false);
+  const { t, language } = useLanguage();
+  const [current, setCurrent] = useState(0);
+  const [fading, setFading] = useState(false);
+  const videoRefs = useRef([]);
+  const timerRef = useRef(null);
+  const labels = phaseLabels[language] || phaseLabels.en;
+
+  const goToNext = useCallback(() => {
+    setFading(true);
+    setTimeout(() => {
+      setCurrent(prev => {
+        const next = (prev + 1) % phases.length;
+        return next;
+      });
+      setFading(false);
+    }, 800);
+  }, []);
+
+  useEffect(() => {
+    timerRef.current = setInterval(goToNext, 8000);
+    return () => clearInterval(timerRef.current);
+  }, [goToNext]);
+
+  useEffect(() => {
+    videoRefs.current.forEach((vid, i) => {
+      if (!vid) return;
+      if (i === current) {
+        vid.currentTime = 0;
+        vid.play().catch(() => {});
+      } else {
+        vid.pause();
+      }
+    });
+  }, [current]);
 
   return (
-    <section data-testid="hero-carousel" className="relative h-screen w-full overflow-hidden">
-      {/* Poster / fallback image */}
-      <div
-        className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${videoLoaded ? 'opacity-0' : 'opacity-100'}`}
-        style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&q=80)' }}
-      />
-
-      {/* Background video */}
-      <video
-        ref={videoRef}
-        data-testid="hero-video"
-        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
-        onCanPlay={() => setVideoLoaded(true)}
-      >
-        <source src="/videos/hero-video.mp4" type="video/mp4" />
-      </video>
+    <section data-testid="hero-carousel" className="relative h-screen w-full overflow-hidden bg-[#0a1628]">
+      {/* Video layers */}
+      {phases.map((phase, i) => (
+        <div
+          key={i}
+          className="absolute inset-0 transition-opacity duration-[1200ms] ease-in-out"
+          style={{ opacity: i === current && !fading ? 1 : 0, zIndex: i === current ? 1 : 0 }}
+        >
+          <video
+            ref={el => videoRefs.current[i] = el}
+            data-testid={i === 0 ? 'hero-video' : undefined}
+            className="w-full h-full object-cover"
+            muted
+            playsInline
+            loop
+            preload={i <= 1 ? 'auto' : 'metadata'}
+            poster={phase.poster}
+          >
+            <source src={phase.src} type="video/mp4" />
+          </video>
+        </div>
+      ))}
 
       {/* Overlay */}
-      <div className="absolute inset-0 z-[2] bg-gradient-to-b from-[#0a1628]/60 via-[#0a1628]/40 to-[#0a1628]/75" />
+      <div className="absolute inset-0 z-[2] bg-gradient-to-b from-[#0a1628]/60 via-[#0a1628]/35 to-[#0a1628]/75" />
+
+      {/* Phase indicator */}
+      <div className="absolute top-24 left-1/2 -translate-x-1/2 z-[4]">
+        <div className="flex items-center gap-2">
+          {phases.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => { clearInterval(timerRef.current); setCurrent(i); timerRef.current = setInterval(goToNext, 8000); }}
+              className={`transition-all duration-500 ${
+                i === current
+                  ? 'bg-[#d4a650] text-[#0a1628] px-4 py-1.5 rounded-full text-xs font-bold shadow-lg'
+                  : 'bg-white/15 backdrop-blur-sm text-white/70 px-3 py-1.5 rounded-full text-xs hover:bg-white/25'
+              }`}
+              data-testid={`phase-indicator-${i}`}
+            >
+              {i + 1}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Phase label */}
+      <div className="absolute top-36 left-1/2 -translate-x-1/2 z-[4]">
+        <span
+          data-testid="phase-label"
+          className={`text-sm tracking-[0.3em] uppercase font-semibold transition-all duration-700 ${fading ? 'opacity-0 translate-y-2' : 'opacity-100 translate-y-0'}`}
+          style={{ color: '#d4a650' }}
+        >
+          {labels[current]}
+        </span>
+      </div>
 
       {/* Content */}
       <div className="absolute inset-0 z-[3] flex items-center justify-center">
@@ -91,6 +167,15 @@ const HeroCarousel = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Progress bar */}
+      <div className="absolute bottom-0 left-0 right-0 z-[4] h-1 bg-white/10">
+        <div
+          className="h-full bg-[#d4a650] transition-none"
+          style={{ width: `${((current + 1) / phases.length) * 100}%`, transition: 'width 8s linear' }}
+          key={current}
+        />
       </div>
 
       {/* Scroll indicator */}
