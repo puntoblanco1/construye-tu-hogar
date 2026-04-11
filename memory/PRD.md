@@ -1,7 +1,7 @@
 # PRD - Construye Tu Hogar Website
 
 ## Original Problem Statement
-Clone the website `https://buildathome.preview.emergentagent.com/` with pixel-perfect multi-page design, multi-language support (AR, EN, ES), RTL support for Arabic, and additional features.
+Clone the website `https://property-hero-build.preview.emergentagent.com/` with pixel-perfect multi-page design, multi-language support (AR, EN, ES), RTL support for Arabic, and additional features.
 
 ## Architecture
 - **Full-stack** React frontend + FastAPI backend + MongoDB

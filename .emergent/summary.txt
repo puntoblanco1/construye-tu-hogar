@@ -1,200 +1,144 @@
 <analysis>**original_problem_statement:**
-The user wants to create a pixel-perfect, multi-page clone of the website .
+The user wants to create a pixel-perfect, multi-page clone of the website . 
+PRODUCT REQUIREMENTS:
+1. Clone original site design/layout (Multi-language AR, EN, ES + RTL).
+2. Display interactive Map with property data parsed from Excel, featuring filters (City, Region, Price).
+3. Implement User Authentication (Email/Password & Google) and a Favorites system to save properties.
+4. Add a Floating WhatsApp button.
+5. Create a Choose your neighbor section with interactive 3D SVG Floor Plans and cinematic room slideshows for 3 prototype houses.
+6. **New:** Implement a full-screen Hero Carousel at the top of the homepage to match the visual style of a reference site ().
 
-**PRODUCT REQUIREMENTS:**
-1.  **Cloning & UI:** Replicate the original site's design, layout, and multi-language functionality (Arabic, English, Spanish). The UI should be responsive and support RTL for Arabic.
-2.  **Branding & Content:** Replace the logo, update social media links, change static text as requested, and populate pages with user-provided content.
-3.  **Core Functionality:**
-    *   Implement four distinct multi-step Journey forms.
-    *   Form submissions should open WhatsApp with a pre-filled summary.
-    *   Implement a comprehensive, searchable, and categorized FAQ page.
-    *   Implement legal pages (Privacy Policy, Terms of Service) and a GDPR-compliant Cookie Banner.
-    *   Implement a Contact page that links to WhatsApp and email.
-    *   **New:** Visualize property data from an Excel file on an interactive Google Map.
-    *   **New:** Add a floating WhatsApp button for easy access to support.
-4.  **Documentation:** Create a structured document outlining a flow for a potential WhatsApp Chatbot based on the FAQ content.
+**User's preferred language**: **Arabic** (You MUST automatically detect the user's primary language from their messages inside the trajectory tag and INSTRUCT next agent to respond in the user's preferred language only. All user interactions must be in Arabic).
 
-**User's preferred language**:
-The user's primary language is **Arabic**. The next agent MUST respond in Arabic only.
-
-**what currently exists?**
-A comprehensive, frontend-only React application that clones the target website. The site is fully internationalized (AR, EN, ES) with robust RTL support for Arabic. Key features include: a homepage, four Journey pages with multi-step forms that generate  links, a detailed FAQ page with search/filter functionality, legal pages (Privacy, Terms), a Contact page, and a GDPR-compliant cookie banner. The UI has been refined based on user feedback to fix layout issues and ensure a smooth user experience.
+**what currently exists?** 
+A full-stack application with a React frontend and FastAPI + MongoDB backend. The frontend handles multi-language (AR, EN, ES) with full RTL support. The Home Page features a Leaflet map (properties parsed from an Excel file), filters, and a Prototypes section featuring interactive 3D isometric floor plans and cinematic slideshows. A global authentication system (Email/Password & Google) allows users to favorite properties. The previously requested horizontal showcase carousel was deleted.
 
 **Last working item**:
-*   **Last item agent was working:** The user uploaded an Excel file () and requested two new features:
-    1.  Analyze the data in the file and display it as points on a Google Map.
-    2.  Add a floating WhatsApp button to the website for persistent, easy contact.
-    The agent had just received the file and was about to begin analysis.
-*   **Status:** NOT STARTED
-*   **Agent Testing Done:** N
-*   **Which testing method agent to use?** Frontend testing agent to verify the map's markers and functionality, and to ensure the floating button appears correctly on all pages and screen sizes.
-*   **User Testing Done:** N
+    - **Last item agent was working**: Implementing a full-screen Hero Carousel at the very top of  to match the style of . The agent formulated a plan and sent an  prompt to get the user's approval.
+    - **Status**: IN PROGRESS (Waiting for human response)
+    - **Agent Testing Done**: N
+    - **Which testing method agent to use?**: Frontend testing agent or screenshot tool
+    - **User Testing Done**: N
 
 **All Pending/In progress Issue list**:
-*   **Issue 1:** Implement Google Map and Floating WhatsApp Button (Priority: P0)
+  Issue 1: Implement full-screen Hero Carousel on Home Page (Priority: P0)
+  
+  Issues Detail:
+  - Issue 1: 
+     - Attempted fixes: Agent formulated a plan and used  to verify the approach with the user before writing code.
+     - Next debug checklist: 
+       - Check the user's response to the pending  request.
+       - Edit  to replace the static Hero section with a dynamic, auto-playing Hero Carousel.
+       - Make it full-screen featuring high-quality stock Mediterranean/Spanish villa images (using ).
+       - Ensure the Carousel matches the overlay style and vibe of .
+     - Why fix this issue and what will be achieved with the fix?: Fulfills the user's explicit request to mimic the reference site's hero section.
+     - Status: IN PROGRESS
+     - Is recurring issue? N
+     - Should Test frontend/backend/both after fix?: Frontend
+     - Blocked on other issue: Blocked pending the user's response to the  call.
 
-**Issues Detail:**
-*   **Issue 1:**
-    *   **Description:** The user wants to add two major features: a Google Map to visualize property data from an Excel file and a floating WhatsApp button for quick contact.
-    *   **Attempted fixes:** None.
-    *   **Next debug checklist:**
-        1.  **Ask the user for a Google Maps API Key.** This is a critical blocker. Explain that the map cannot be implemented without it.
-        2.  Install necessary libraries: Looking in indexes: https://pypi.org/simple, https://d33sy5i8bnduwe.cloudfront.net/simple/
-Requirement already satisfied: pandas in /root/.venv/lib/python3.11/site-packages (2.3.3)
-Collecting openpyxl
-  Downloading openpyxl-3.1.5-py2.py3-none-any.whl.metadata (2.5 kB)
-Requirement already satisfied: numpy>=1.23.2 in /root/.venv/lib/python3.11/site-packages (from pandas) (2.4.0)
-Requirement already satisfied: python-dateutil>=2.8.2 in /root/.venv/lib/python3.11/site-packages (from pandas) (2.9.0.post0)
-Requirement already satisfied: pytz>=2020.1 in /root/.venv/lib/python3.11/site-packages (from pandas) (2025.2)
-Requirement already satisfied: tzdata>=2022.7 in /root/.venv/lib/python3.11/site-packages (from pandas) (2025.3)
-Collecting et-xmlfile (from openpyxl)
-  Downloading et_xmlfile-2.0.0-py3-none-any.whl.metadata (2.7 kB)
-Requirement already satisfied: six>=1.5 in /root/.venv/lib/python3.11/site-packages (from python-dateutil>=2.8.2->pandas) (1.17.0)
-Downloading openpyxl-3.1.5-py2.py3-none-any.whl (250 kB)
-Downloading et_xmlfile-2.0.0-py3-none-any.whl (18 kB)
-Installing collected packages: et-xmlfile, openpyxl
-
-Successfully installed et-xmlfile-2.0.0 openpyxl-3.1.5 to analyze the Excel file. yarn add v1.22.22
-[1/4] Resolving packages...
-[2/4] Fetching packages...
-[3/4] Linking dependencies...
-[4/4] Building fresh packages...
-success Saved lockfile.
-success Saved 12 new dependencies.
-info Direct dependencies
-└─ @react-google-maps/api@2.20.8
-info All dependencies
-├─ @googlemaps/js-api-loader@1.16.8
-├─ @googlemaps/markerclusterer@2.5.3
-├─ @react-google-maps/api@2.20.8
-├─ @react-google-maps/infobox@2.20.0
-├─ @react-google-maps/marker-clusterer@2.20.0
-├─ @types/google.maps@3.58.1
-├─ fast-deep-equal@3.1.3
-├─ invariant@2.2.4
-├─ js-tokens@4.0.0
-├─ kdbush@4.0.2
-├─ loose-envify@1.4.0
-└─ supercluster@8.0.1
-Done in 2.11s. for the map component.
-        3.  Use pandas to read and parse the data from .
-        4.  Create a new page/route (e.g., ) to host the Google Map component.
-        5.  Implement the map component, using the parsed data to create markers for each property location.
-        6.  Create a new, reusable  component.
-        7.  Add the floating button to the main  layout so it appears on all pages.
-        8.  Add a link to the new Opportunities map page in the .
-    *   **Why fix this issue and what will be achieved with the fix?** This will implement a core feature requested by the user, allowing potential customers to visually browse available properties and easily contact the business.
-    *   **Status:** NOT STARTED
-    *   **Is recurring issue?** N
-    *   **Should Test frontend/backend/both after fix?** Frontend
-    *   **Blocked on other issue:** **Requires Google Maps API Key from the user.**
-
-**In progress Task List**:
+**In progress Task List**: 
 None.
 
 **Upcoming and Future Tasks**
-*   **Upcoming Tasks (High-Impact):**
-    1.  **Testimonials Section (P1):** Add a section to the homepage to display customer testimonials and build trust.
-    2.  **Team Section (P1):** Create a page or section to introduce the team behind the company, adding a human element and increasing credibility.
-*   **Future Tasks (Enhancements):**
-    1.  **Backend & Database Integration:** Implement a FastAPI backend to save form submissions to MongoDB, providing a persistent record of leads.
-    2.  **Interactive Savings Calculator:** A tool where users can input their budget to see potential savings.
-    3.  **Blog/Content Section:** For SEO and providing value to users.
-    4.  **Newsletter Signup Form:** To capture leads for email marketing.
+  Upcoming Tasks:
+  - Testimonials Section (P1): Add a section to the homepage to display customer testimonials.
+  - Team Section (P1): Create a page or section to introduce the team behind the company.
+
+  Future Tasks:
+  - Interactive Savings Calculator (P2): A tool where users can input their budget to see potential savings.
+  - Blog/Content Section (P2): For SEO and providing value to users.
+  - Newsletter Signup Form (P2): To capture leads for email marketing.
 
 **Completed work in this session**
-*   **Logo Update:** Successfully replaced the placeholder logo with the user-provided one.
-*   **FAQ Page:** Implemented a full-featured, trilingual FAQ page with a smart accordion, search, and category filters.
-*   **Translation Refinement:** Corrected all Arabic translations from colloquial to formal Arabic (Fusha) across the site.
-*   **WhatsApp Chatbot Document:** Created a detailed markdown file () outlining the conversation flow for a future chatbot.
-*   **Contact & Legal Pages:**
-    -   Implemented the  with direct links for WhatsApp and Email.
-    -   Created and integrated trilingual pages for  and .
-    -   Added links for these new pages in the footer.
-*   **UI/UX Fixes:**
-    -   **RTL Layout:** Fixed layout issues in the Navbar and Footer when the language is switched to Arabic.
-    -   **Scroll to Top:** Implemented a component that ensures navigation to a new page starts at the top.
-*   **GDPR Compliance:** Added a multi-language Cookie Banner that appears for new visitors and saves their preference in .
-*   **Support Queries:** Answered user questions regarding subscription management and credit rollover by consulting the .
+*(Note: Session was brief; these carry over from immediate prior work)*
+- Excel file parsed to JSON and Leaflet Map implemented on the Home Page with filters and clustering (DONE)
+- Floating WhatsApp button added (DONE)
+- FastAPI backend configured for Authentication (Email + Google) and Favorites system (DONE)
+- Context-based Auth flow and  integrated into the frontend (DONE)
+- 3D Isometric interactive SVG Floor Plans with cinematic slideshows created for 3 Prototype Houses (DONE)
 
 **Earlier issues found/mentioned but not fixed**
 None.
 
 **Known issue recurrence from previous fork**
-- **Issue recurrence in previous fork:** N/A
-- **Recurrence count:** 0
-- **Status:** N/A
+  - Issue recurrence in previous fork: None
+  - Recurrence count: 0
+  - Status: N/A
 
 **Code Architecture**
 
 
 **Key Technical Concepts**
-*   **Frontend:** React, React Router, TailwindCSS, shadcn/ui.
-*   **Internationalization (i18n):** Custom React Context-based solution for managing translations in AR, EN, ES, with full RTL support.
-*   **State Management:** , , and  for managing UI state, language, and cookie consent.
-*   **Next Steps:** Will involve **Google Maps API** integration and client-side data parsing from an Excel file.
+Frontend: React, TailwindCSS, React Leaflet (Maps), Context API (Auth & i18n), SVG manipulation for 3D mapping.
+Backend: FastAPI, MongoDB (local test_database).
 
 **key DB schema**
-No database is currently in use. All data is static or handled client-side.
+  - users: {{_id, email, password_hash, name, google_id}}
+  - favorites: {{_id, user_id, property_id}}
 
 **changes in tech stack**
-*   **Required for next task:**
-    *   Backend: ,  (for one-time analysis or if a backend script is created).
-    *   Frontend: .
+  - Added FastAPI and MongoDB for the backend.
+  - Added , , and  to the frontend.
 
 **All files of reference**
-*   : **CRITICAL.** The data source for the upcoming Google Map feature.
-*   : Main application entry point, modified to include the Cookie Banner and will need modification for a scroll-to-top component.
-*   : Modified for RTL layout and will need a new link for the map page.
-*   : The central file for all text content in the application.
-*   : A static documentation file created for the user.
+  -  (Target for Hero Carousel update)
+  - 
 
-**Areas that need refactoring**:
-None. The code is well-structured for a frontend-only application.
+**Areas that need refactoring**: 
+None currently. 
 
 **key api endpoints**
-None implemented. The next task is frontend-focused but will require a Google Maps API Key.
+  - 
+  - 
+  - 
+  - 
 
 **Critical Info for New Agent**
-*   **Language:** You **MUST** communicate with the user in **Arabic**.
-*   **Blocker:** The next task (Google Map integration) is **blocked** until you acquire a **Google Maps API Key** from the user. You must ask for it as your first step.
-*   **Dependencies:** Be prepared to install new dependencies:  and  for Python (if analyzing the file in a script) and  for the React frontend via yarn install v1.22.22
-[1/4] Resolving packages...
-success Already up-to-date.
-Done in 0.20s..
-*   **User Goal:** The user is focused on adding tangible, value-adding features. The map of properties is a significant one.
+- **CREDIT USAGE SENSITIVITY:** The user is highly sensitive to credit usage. **DO NOT** use the  unless absolutely necessary. Instead, use the  to grab free stock images for the Hero Carousel.
+- **LANGUAGE:** Always communicate in **Arabic**.
+- **CURRENT BLOCKER:** The previous agent ended the session right after firing an  tool to confirm the development plan. **You must check the incoming user message** to see their approval or feedback before writing the code for .
 
 **documents and test reports created in this job**
-*   
+  - /app/test_reports/iteration_1.json
+  - /app/test_reports/iteration_2.json
+  - /app/memory/PRD.md
 
-**Last 10 User Messages and any pending HUMAN messages**
-1.  **User:** Asks what's missing on the website.
-2.  **Agent:** Suggests legal pages, testimonials, etc., and asks about the contact page.
-3.  **User:** Requests clarification on the language used in the FAQ (wants formal Arabic) and asks to structure the FAQ content for a WhatsApp Chatbot.
-4.  **Agent:** Implements the translation fixes and creates the chatbot structure file.
-5.  **User:** Asks where the chatbot file is.
-6.  **Agent:** Clarifies it's a documentation file and provides a download link.
-7.  **User:** Approves adding the high-priority tasks (Contact Page fix, Legal Pages).
-8.  **User:** Complains about RTL layout issues and links not scrolling to the top; also asks about pausing the subscription.
-9.  **Agent:** Fixes all UI issues and answers the subscription question.
-10. **User (LATEST):** Uploads an Excel file () and asks the agent to analyze it, display the data on a Google Map, and add a floating WhatsApp button.
+**Last 10 User Messages and any pending HUMAN messages** 
+ - User: Uploads PDF of 3 Casa Prototypes, wants 3D options for users to choose. (Completed)
+ - User: Wants 360 virtual tour for prototypes. (Completed)
+ - User: Wants them side by side to compare sizes. (Completed)
+ - User: Wants them separated again with a cinematic walkthrough video-like feel. (Completed)
+ - User: Requests Netflix-style horizontal Carousel for showcases. (Completed)
+ - User: Delete the Netflix Carousel. Add a full-screen Hero Carousel at the top of the homepage like . Only do this. Ask questions if unsure. Use minimal credits. (In Progress)
+ - Agent: [Called  to propose the plan for the Hero Carousel]
+ - **HUMAN (PENDING):** *Waiting for user response to the  prompt.*
 
 **Project Health Check:**
-*   **Broken:** None.
-*   **Mocked:** All form submission logic is mocked on the frontend (generates  links). No data is saved to a server.
+Healthy.
 
 **3rd Party Integrations**
-*   **Current:** None.
-*   **Planned:** Google Maps (Requires User API Key).
+  - Google Login (uses Emergent-managed Google Auth playbook)
 
 **Testing status**
-*   **Testing agent used after significant changes:** NO
-*   **Troubleshoot agent used after agent stuck in loop:** NO
-*   **Test files created:** None
-*   **Known regressions:** None
+  - Testing agent used after significant changes: YES (in prior iterations)
+  - Troubleshoot agent used after agent stuck in loop: NO
+  - Test files created: None
+  - Known regressions: None
 
 **Credentials to test flow:**
-*   A **Google Maps API Key** is required for the next task. The agent must request this from the user.
+None required for local tests.
 
 **What agent forgot to execute**
-The agent did not forget anything. The session ended immediately after the user provided a new, complex feature request involving file analysis and a major integration. The next agent's primary task is to address this new request.</analysis>
+The agent did not forget anything; the session paused strictly to wait for the user's response to .
+
+**Debugging checklist for current issue**
+    Issue: Implement full-screen Hero Carousel
+    Frontend files to check: 
+    - 
+    Steps:
+    1. Await/read user response to the  confirmation.
+    2. Remove the static top section inside .
+    3. Build an auto-sliding Carousel component (internal to HomePage or a separate component).
+    4. Use  to pull 3-4 high quality Mediterranean/Spanish villa images (DO NOT generate them).
+    5. Ensure the design mimics the full screen overlay style of .</analysis>
