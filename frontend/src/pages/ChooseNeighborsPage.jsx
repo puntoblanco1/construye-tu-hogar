@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { Button } from '../components/ui/button';
-import { CheckCircle, Users } from 'lucide-react';
+import { CheckCircle, Users, ZoomIn, X, AlertCircle } from 'lucide-react';
 import JourneyForm from '../components/JourneyForm';
-import PrototypesSection from '../components/PrototypesSection';
 import { spanishCities } from '../data/cities';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { Input } from '../components/ui/input';
@@ -21,7 +20,7 @@ const ChooseNeighborsPage = () => {
   const { language } = useLanguage();
   const { toast } = useToast();
   const [showForm, setShowForm] = useState(false);
-  const [selectedPrototype, setSelectedPrototype] = useState(null);
+  const [zoomImage, setZoomImage] = useState(null);
   const [formData, setFormData] = useState({
     groupType: '', landOwnership: '', selectedDesign: '',
     city: '', minArea: '', maxArea: '',
@@ -64,12 +63,17 @@ const ChooseNeighborsPage = () => {
   const areas = Array.from({ length: 50 }, (_, i) => (i + 1) * 100);
   const rooms = Array.from({ length: 10 }, (_, i) => i + 1);
 
+  const req = '(Required)';
+  const reqEs = '(Obligatorio)';
+  const reqAr = '(مطلوب)';
+  const reqLabel = language === 'es' ? reqEs : language === 'ar' ? reqAr : req;
+
   const ftxt = language === 'en' ? {
     step1: 'Group Identity', step2: 'Land', step3: 'Design', step4: 'Location & Space', step5: 'Preferences', step6: 'Contact',
     groupLabel: 'Select Group Type', justMe: 'Just me and my family', groupSmall: 'Group of families < 5', groupLarge: 'Group of families >= 5',
-    landQuestion: 'Do you already have land for your house?', landRequired: '(Required)',
+    landQuestion: 'Do you already have land for your house?',
     landYes: 'Yes, I own it', landDecided: 'I have decided on the land, pending purchase', landSearching: "I'm looking for land", landNo: 'No',
-    designQuestion: 'Choose your preferred design', designRequired: '(Required)',
+    designQuestion: 'Choose your preferred design', clickToZoom: 'Click image to zoom',
     designRooms: 'bedroom', designRoomsPlural: 'bedrooms', designArea: 'Area', designFloor: 'floor', designBaths: 'bathroom', designBathsPlural: 'bathrooms',
     cityLabel: 'Select City', minAreaLabel: 'Minimum Area (m²)', maxAreaLabel: 'Maximum Area (m²)',
     totalRoomsLabel: 'Total Rooms', masterBedroomsLabel: 'Master Bedrooms', individualRoomsLabel: 'Individual Rooms',
@@ -79,9 +83,9 @@ const ChooseNeighborsPage = () => {
   } : language === 'es' ? {
     step1: 'Identidad', step2: 'Terreno', step3: 'Diseño', step4: 'Ubicación', step5: 'Preferencias', step6: 'Contacto',
     groupLabel: 'Tipo de Grupo', justMe: 'Solo yo y mi familia', groupSmall: 'Grupo < 5', groupLarge: 'Grupo >= 5',
-    landQuestion: '¿Ya tienes el terreno para tu casa?', landRequired: '(Obligatorio)',
+    landQuestion: '¿Ya tienes el terreno para tu casa?',
     landYes: 'Sí, lo tengo en propiedad', landDecided: 'Tengo decidido el terreno pendiente de comprar', landSearching: 'Estoy buscando terreno', landNo: 'No',
-    designQuestion: '¿Cuál diseño prefieres?', designRequired: '(Obligatorio)',
+    designQuestion: '¿Cuál diseño prefieres?', clickToZoom: 'Haz clic en la imagen para ampliar',
     designRooms: 'habitación', designRoomsPlural: 'habitaciones', designArea: 'Área', designFloor: 'planta', designBaths: 'baño', designBathsPlural: 'baños',
     cityLabel: 'Ciudad', minAreaLabel: 'Área Mínima', maxAreaLabel: 'Área Máxima',
     totalRoomsLabel: 'Habitaciones', masterBedroomsLabel: 'Principales', individualRoomsLabel: 'Individuales',
@@ -91,9 +95,9 @@ const ChooseNeighborsPage = () => {
   } : {
     step1: 'الهوية', step2: 'الأرض', step3: 'التصميم', step4: 'الموقع', step5: 'التفضيلات', step6: 'التواصل',
     groupLabel: 'نوع المجموعة', justMe: 'أنا وعائلتي', groupSmall: '< 5 عائلات', groupLarge: '>= 5 عائلات',
-    landQuestion: 'هل لديك أرض لبناء منزلك؟', landRequired: '(مطلوب)',
+    landQuestion: 'هل لديك أرض لبناء منزلك؟',
     landYes: 'نعم، أملكها', landDecided: 'قررت الأرض وبانتظار الشراء', landSearching: 'أبحث عن أرض', landNo: 'لا',
-    designQuestion: 'اختر التصميم المفضل لك', designRequired: '(مطلوب)',
+    designQuestion: 'اختر التصميم المفضل لك', clickToZoom: 'اضغط على الصورة للتكبير',
     designRooms: 'غرفة نوم', designRoomsPlural: 'غرف نوم', designArea: 'المساحة', designFloor: 'طابق', designBaths: 'حمام', designBathsPlural: 'حمامات',
     cityLabel: 'المدينة', minAreaLabel: 'المساحة الأدنى', maxAreaLabel: 'المساحة الأقصى',
     totalRoomsLabel: 'إجمالي', masterBedroomsLabel: 'رئيسية', individualRoomsLabel: 'فردية',
@@ -103,15 +107,16 @@ const ChooseNeighborsPage = () => {
   };
 
   const stepLabels = [ftxt.step1, ftxt.step2, ftxt.step3, ftxt.step4, ftxt.step5, ftxt.step6];
-  const protoLabel = selectedPrototype ? `Casa ${selectedPrototype}` : 'Not selected';
   const designLabel = formData.selectedDesign ? designs.find(d => d.id === formData.selectedDesign) : null;
 
   const handleSubmit = () => {
     const dl = designLabel ? `Casa ${designLabel.rooms} Hab - ${designLabel.area}m²` : 'Not selected';
-    const message = `*Choose Neighbors*\n\nPrototype: ${protoLabel}\nDesign: ${dl}\nLand: ${formData.landOwnership}\nGroup: ${formData.groupType}\nCity: ${formData.city}\nArea: ${formData.minArea}-${formData.maxArea}m²\nRooms: ${formData.totalRooms}\nName: ${formData.fullName}\nEmail: ${formData.email}\nWhatsApp: ${formData.countryCode}${formData.whatsapp}`;
+    const message = `*Choose Neighbors*\n\nDesign: ${dl}\nLand: ${formData.landOwnership}\nGroup: ${formData.groupType}\nCity: ${formData.city}\nArea: ${formData.minArea}-${formData.maxArea}m²\nRooms: ${formData.totalRooms}\nFinishing: ${formData.finishing}\nPool: ${formData.sharedPool}\nName: ${formData.fullName}\nEmail: ${formData.email}\nWhatsApp: ${formData.countryCode}${formData.whatsapp}`;
     window.open(`https://wa.me/34673365300?text=${encodeURIComponent(message)}`, '_blank');
     toast({ title: "Success!", description: "Opening WhatsApp..." });
   };
+
+  const RequiredBadge = () => <span className="text-red-500 text-sm font-semibold ms-2">{reqLabel}</span>;
 
   if (showForm) {
     return (
@@ -123,9 +128,9 @@ const ChooseNeighborsPage = () => {
           <JourneyForm stepLabels={stepLabels}>
             {/* Step 1: Group Identity */}
             <div className="space-y-6">
-              <h2 className="text-2xl font-bold mb-6">{ftxt.step1}</h2>
+              <h2 className="text-2xl font-bold mb-6">{ftxt.step1}<RequiredBadge /></h2>
               <div>
-                <Label>{ftxt.groupLabel}</Label>
+                <Label>{ftxt.groupLabel}<RequiredBadge /></Label>
                 <Select value={formData.groupType} onValueChange={(val) => setFormData({...formData, groupType: val})}>
                   <SelectTrigger><SelectValue /></SelectTrigger>
                   <SelectContent>
@@ -139,12 +144,11 @@ const ChooseNeighborsPage = () => {
 
             {/* Step 2: Land Ownership */}
             <div className="space-y-6">
-              <h2 className="text-2xl font-bold mb-2">{ftxt.landQuestion}</h2>
-              <span className="text-red-500 text-sm font-semibold">{ftxt.landRequired}</span>
+              <h2 className="text-2xl font-bold mb-2">{ftxt.landQuestion}<RequiredBadge /></h2>
               <RadioGroup
                 value={formData.landOwnership}
                 onValueChange={(val) => setFormData({...formData, landOwnership: val})}
-                className="space-y-4 mt-6"
+                className="space-y-4 mt-4"
               >
                 {[
                   { value: 'owned', label: ftxt.landYes },
@@ -160,49 +164,57 @@ const ChooseNeighborsPage = () => {
               </RadioGroup>
             </div>
 
-            {/* Step 3: Design Selection */}
+            {/* Step 3: Design Selection with Zoom */}
             <div className="space-y-6">
               <div className="text-center mb-2">
-                <h2 className="text-2xl font-bold">{ftxt.designQuestion}</h2>
-                <span className="text-red-500 text-sm font-semibold">{ftxt.designRequired}</span>
+                <h2 className="text-2xl font-bold">{ftxt.designQuestion}<RequiredBadge /></h2>
+                <p className="text-gray-400 text-sm mt-2 flex items-center justify-center gap-1">
+                  <ZoomIn className="w-4 h-4" /> {ftxt.clickToZoom}
+                </p>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
                 {designs.map(d => {
                   const isSelected = formData.selectedDesign === d.id;
                   const roomText = d.rooms === 1 ? ftxt.designRooms : ftxt.designRoomsPlural;
                   const bathText = d.baths === 1 ? ftxt.designBaths : ftxt.designBathsPlural;
                   return (
-                    <button
+                    <div
                       key={d.id}
                       data-testid={`design-option-${d.id}`}
-                      onClick={() => setFormData({...formData, selectedDesign: d.id})}
-                      className={`group rounded-2xl overflow-hidden border-3 transition-all duration-300 text-left ${
+                      className={`rounded-2xl overflow-hidden border-2 transition-all duration-300 ${
                         isSelected
-                          ? 'border-[#d4a650] shadow-xl ring-2 ring-[#d4a650]/30 scale-[1.02]'
+                          ? 'border-[#d4a650] shadow-xl ring-2 ring-[#d4a650]/30'
                           : 'border-gray-200 hover:border-gray-400 hover:shadow-lg'
                       }`}
                     >
-                      <div className="relative bg-white p-3">
-                        <img
-                          src={d.image}
-                          alt={`Casa ${d.rooms} - ${d.area}m²`}
-                          className="w-full h-auto rounded-lg"
-                        />
-                        {isSelected && (
-                          <div className="absolute top-5 right-5 w-7 h-7 bg-[#d4a650] rounded-full flex items-center justify-center">
-                            <CheckCircle className="w-5 h-5 text-white" />
+                      {/* Zoomable image */}
+                      <div
+                        className="relative bg-white p-3 cursor-zoom-in group"
+                        onClick={() => setZoomImage(d.image)}
+                      >
+                        <img src={d.image} alt={`Casa ${d.rooms} - ${d.area}m²`} className="w-full h-auto rounded-lg" />
+                        <div className="absolute inset-3 bg-black/0 group-hover:bg-black/20 rounded-lg transition-all duration-300 flex items-center justify-center">
+                          <ZoomIn className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-lg" />
+                        </div>
+                      </div>
+                      {/* Select button area */}
+                      <button
+                        className="w-full p-4 bg-white border-t text-left"
+                        onClick={() => setFormData({...formData, selectedDesign: d.id})}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <h3 className="text-lg font-bold text-gray-900">{d.rooms} {roomText}</h3>
+                            <p className="text-sm text-gray-500">{ftxt.designArea}: {d.area} m² · {d.floors} {ftxt.designFloor} · {d.baths} {bathText}</p>
                           </div>
-                        )}
-                      </div>
-                      <div className="p-4 bg-white border-t">
-                        <h3 className="text-lg font-bold text-gray-900 mb-1">
-                          {d.rooms} {roomText}
-                        </h3>
-                        <p className="text-sm text-gray-500">
-                          {ftxt.designArea}: {d.area} m² · {d.floors} {ftxt.designFloor} · {d.baths} {bathText}
-                        </p>
-                      </div>
-                    </button>
+                          {isSelected && (
+                            <div className="w-7 h-7 bg-[#d4a650] rounded-full flex items-center justify-center flex-shrink-0">
+                              <CheckCircle className="w-5 h-5 text-white" />
+                            </div>
+                          )}
+                        </div>
+                      </button>
+                    </div>
                   );
                 })}
               </div>
@@ -210,9 +222,9 @@ const ChooseNeighborsPage = () => {
 
             {/* Step 4: Location & Space */}
             <div className="space-y-6">
-              <h2 className="text-2xl font-bold mb-6">{ftxt.step4}</h2>
+              <h2 className="text-2xl font-bold mb-6">{ftxt.step4}<RequiredBadge /></h2>
               <div>
-                <Label>{ftxt.cityLabel}</Label>
+                <Label>{ftxt.cityLabel}<RequiredBadge /></Label>
                 <Select value={formData.city} onValueChange={(val) => setFormData({...formData, city: val})}>
                   <SelectTrigger><SelectValue /></SelectTrigger>
                   <SelectContent>{spanishCities.map(c => <SelectItem key={c} value={c}>{c}</SelectItem>)}</SelectContent>
@@ -220,14 +232,14 @@ const ChooseNeighborsPage = () => {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Label>{ftxt.minAreaLabel}</Label>
+                  <Label>{ftxt.minAreaLabel}<RequiredBadge /></Label>
                   <Select value={formData.minArea} onValueChange={(val) => setFormData({...formData, minArea: val})}>
                     <SelectTrigger><SelectValue /></SelectTrigger>
                     <SelectContent>{areas.map(a => <SelectItem key={a} value={a.toString()}>{a}m²</SelectItem>)}</SelectContent>
                   </Select>
                 </div>
                 <div>
-                  <Label>{ftxt.maxAreaLabel}</Label>
+                  <Label>{ftxt.maxAreaLabel}<RequiredBadge /></Label>
                   <Select value={formData.maxArea} onValueChange={(val) => setFormData({...formData, maxArea: val})}>
                     <SelectTrigger><SelectValue /></SelectTrigger>
                     <SelectContent>{areas.map(a => <SelectItem key={a} value={a.toString()}>{a}m²</SelectItem>)}</SelectContent>
@@ -238,24 +250,24 @@ const ChooseNeighborsPage = () => {
 
             {/* Step 5: Preferences */}
             <div className="space-y-6">
-              <h2 className="text-2xl font-bold mb-6">{ftxt.step5}</h2>
+              <h2 className="text-2xl font-bold mb-6">{ftxt.step5}<RequiredBadge /></h2>
               <div className="grid grid-cols-3 gap-4">
                 <div>
-                  <Label>{ftxt.totalRoomsLabel}</Label>
+                  <Label>{ftxt.totalRoomsLabel}<RequiredBadge /></Label>
                   <Select value={formData.totalRooms} onValueChange={(val) => setFormData({...formData, totalRooms: val})}>
                     <SelectTrigger><SelectValue /></SelectTrigger>
                     <SelectContent>{rooms.map(r => <SelectItem key={r} value={r.toString()}>{r}</SelectItem>)}</SelectContent>
                   </Select>
                 </div>
                 <div>
-                  <Label>{ftxt.masterBedroomsLabel}</Label>
+                  <Label>{ftxt.masterBedroomsLabel}<RequiredBadge /></Label>
                   <Select value={formData.masterBedrooms} onValueChange={(val) => setFormData({...formData, masterBedrooms: val})}>
                     <SelectTrigger><SelectValue /></SelectTrigger>
                     <SelectContent>{rooms.map(r => <SelectItem key={r} value={r.toString()}>{r}</SelectItem>)}</SelectContent>
                   </Select>
                 </div>
                 <div>
-                  <Label>{ftxt.individualRoomsLabel}</Label>
+                  <Label>{ftxt.individualRoomsLabel}<RequiredBadge /></Label>
                   <Select value={formData.individualRooms} onValueChange={(val) => setFormData({...formData, individualRooms: val})}>
                     <SelectTrigger><SelectValue /></SelectTrigger>
                     <SelectContent>{rooms.map(r => <SelectItem key={r} value={r.toString()}>{r}</SelectItem>)}</SelectContent>
@@ -264,7 +276,7 @@ const ChooseNeighborsPage = () => {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Label>{ftxt.floorsLabel}</Label>
+                  <Label>{ftxt.floorsLabel}<RequiredBadge /></Label>
                   <Select value={formData.floors} onValueChange={(val) => setFormData({...formData, floors: val})}>
                     <SelectTrigger><SelectValue /></SelectTrigger>
                     <SelectContent>
@@ -275,7 +287,7 @@ const ChooseNeighborsPage = () => {
                   </Select>
                 </div>
                 <div>
-                  <Label>{ftxt.finishingLabel}</Label>
+                  <Label>{ftxt.finishingLabel}<RequiredBadge /></Label>
                   <Select value={formData.finishing} onValueChange={(val) => setFormData({...formData, finishing: val})}>
                     <SelectTrigger><SelectValue /></SelectTrigger>
                     <SelectContent>
@@ -287,7 +299,7 @@ const ChooseNeighborsPage = () => {
                 </div>
               </div>
               <div>
-                <Label>{ftxt.sharedPoolLabel}</Label>
+                <Label>{ftxt.sharedPoolLabel}<RequiredBadge /></Label>
                 <RadioGroup value={formData.sharedPool} onValueChange={(val) => setFormData({...formData, sharedPool: val})}>
                   <div className="flex space-x-4">
                     <div className="flex items-center space-x-2"><RadioGroupItem value="yes" id="pool-yes" /><Label htmlFor="pool-yes">{ftxt.yes}</Label></div>
@@ -299,11 +311,11 @@ const ChooseNeighborsPage = () => {
 
             {/* Step 6: Contact */}
             <div className="space-y-6">
-              <h2 className="text-2xl font-bold mb-6">{ftxt.step6}</h2>
-              <div><Label>{ftxt.fullNameLabel}</Label><Input value={formData.fullName} onChange={(e) => setFormData({...formData, fullName: e.target.value})} /></div>
-              <div><Label>{ftxt.emailLabel}</Label><Input type="email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} /></div>
+              <h2 className="text-2xl font-bold mb-6">{ftxt.step6}<RequiredBadge /></h2>
+              <div><Label>{ftxt.fullNameLabel}<RequiredBadge /></Label><Input value={formData.fullName} onChange={(e) => setFormData({...formData, fullName: e.target.value})} /></div>
+              <div><Label>{ftxt.emailLabel}<RequiredBadge /></Label><Input type="email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} /></div>
               <div>
-                <Label>{ftxt.whatsappLabel}</Label>
+                <Label>{ftxt.whatsappLabel}<RequiredBadge /></Label>
                 <div className="flex space-x-2">
                   <Input className="w-24" value={formData.countryCode} onChange={(e) => setFormData({...formData, countryCode: e.target.value})} />
                   <Input className="flex-1" value={formData.whatsapp} onChange={(e) => setFormData({...formData, whatsapp: e.target.value})} />
@@ -313,6 +325,28 @@ const ChooseNeighborsPage = () => {
             </div>
           </JourneyForm>
         </div>
+
+        {/* Zoom Modal */}
+        {zoomImage && (
+          <div
+            data-testid="zoom-modal"
+            className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4 cursor-zoom-out"
+            onClick={() => setZoomImage(null)}
+          >
+            <button
+              className="absolute top-6 right-6 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-colors"
+              onClick={() => setZoomImage(null)}
+            >
+              <X className="w-6 h-6 text-white" />
+            </button>
+            <img
+              src={zoomImage}
+              alt="Design zoom"
+              className="max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>
+        )}
       </div>
     );
   }
@@ -341,12 +375,6 @@ const ChooseNeighborsPage = () => {
           </div>
         </div>
       </section>
-
-      <PrototypesSection
-        selectable
-        selectedId={selectedPrototype}
-        onSelect={(id) => setSelectedPrototype(id === selectedPrototype ? null : id)}
-      />
 
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
