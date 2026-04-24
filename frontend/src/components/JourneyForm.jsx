@@ -7,7 +7,7 @@ import { useLanguage } from '../context/LanguageContext';
 const JourneyForm = ({ journeyType, children, onSubmit, stepLabels }) => {
   const { t } = useLanguage();
   const [currentStep, setCurrentStep] = useState(1);
-  const totalSteps = 4;
+  const totalSteps = stepLabels ? stepLabels.length : React.Children.count(children);
 
   const handleNext = () => {
     if (currentStep < totalSteps) {
