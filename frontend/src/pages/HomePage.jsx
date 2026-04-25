@@ -7,7 +7,6 @@ import { Badge } from '../components/ui/badge';
 import { Card } from '../components/ui/card';
 import MapSection from '../components/MapSection';
 import AuthModal from '../components/AuthModal';
-import PrototypesSection from '../components/PrototypesSection';
 import HeroCarousel from '../components/HeroCarousel';
 import ParallaxDivider from '../components/ParallaxDivider';
 import BlogSection from '../components/BlogSection';
@@ -130,11 +129,6 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-
-      {/* House Prototypes */}
-      <ScrollReveal animation="fade-up">
-        <PrototypesSection />
-      </ScrollReveal>
 
       {/* Map Section */}
       <ScrollReveal animation="fade-up">

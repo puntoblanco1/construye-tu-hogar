@@ -1,7 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { ScrollReveal } from '../hooks/useScrollReveal';
+
+const articleSlugs = ['save-40-percent', 'legal-guide-foreigners', 'valencia-rising-star'];
 
 const blogData = {
   en: {
@@ -123,6 +126,7 @@ const BlogSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {data.articles.map((article, i) => (
             <ScrollReveal key={i} animation="fade-up" delay={i * 150}>
+              <Link to={`/blog/${articleSlugs[i]}`} data-testid={`blog-article-link-${i}`} className="block h-full">
               <article
                 data-testid={`blog-article-${i}`}
                 className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 hover:-translate-y-1 cursor-pointer h-full flex flex-col"
@@ -162,6 +166,7 @@ const BlogSection = () => {
                   </div>
                 </div>
               </article>
+              </Link>
             </ScrollReveal>
           ))}
         </div>

@@ -20,6 +20,7 @@ import FAQPage from "./pages/FAQPage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import TermsPage from "./pages/TermsPage";
 import FavoritesPage from "./pages/FavoritesPage";
+import BlogArticlePage from "./pages/BlogArticlePage";
 import { Toaster } from "./components/ui/toaster";
 
 // Handle Google OAuth callback
@@ -82,6 +83,7 @@ function AppRouter() {
         <Route path="/privacy" element={<PrivacyPolicyPage />} />
         <Route path="/terms" element={<TermsPage />} />
         <Route path="/favorites" element={<FavoritesPage />} />
+        <Route path="/blog/:slug" element={<BlogArticlePage />} />
       </Routes>
       <Footer />
       <FloatingWhatsApp />
