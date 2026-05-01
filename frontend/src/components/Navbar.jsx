@@ -81,9 +81,6 @@ const Navbar = () => {
               <Link to="/faq" onClick={handleLinkClick} className="text-gray-300 hover:text-[#d4a650] transition-colors text-sm font-medium">
                 {t.nav.faq || 'FAQ'}
               </Link>
-              <a href="/#opportunities" className="text-gray-300 hover:text-[#d4a650] transition-colors text-sm font-medium" data-testid="nav-opportunities">
-                {t.nav.opportunities || 'Opportunities'}
-              </a>
               <Link to="/contact" onClick={handleLinkClick} className="text-gray-300 hover:text-[#d4a650] transition-colors text-sm font-medium">
                 {t.nav.contact}
               </Link>
@@ -182,9 +179,6 @@ const Navbar = () => {
               <Link to="/faq" onClick={handleLinkClick} className="block text-gray-300 hover:text-[#d4a650] transition-colors py-2">
                 {t.nav.faq || 'FAQ'}
               </Link>
-              <a href="/#opportunities" onClick={handleLinkClick} className="block text-gray-300 hover:text-[#d4a650] transition-colors py-2">
-                {t.nav.opportunities || 'Opportunities'}
-              </a>
               <Link to="/contact" onClick={handleLinkClick} className="block text-gray-300 hover:text-[#d4a650] transition-colors py-2">
                 {t.nav.contact}
               </Link>
