@@ -5,7 +5,6 @@ import { useLanguage } from '../context/LanguageContext';
 import { Button } from '../components/ui/button';
 import { Badge } from '../components/ui/badge';
 import { Card } from '../components/ui/card';
-import MapSection from '../components/MapSection';
 import AuthModal from '../components/AuthModal';
 import HeroCarousel from '../components/HeroCarousel';
 import ParallaxDivider from '../components/ParallaxDivider';
@@ -132,7 +131,7 @@ const HomePage = () => {
 
       {/* Map Section */}
       <ScrollReveal animation="fade-up">
-        <MapSection onAuthRequired={() => setShowAuth(true)} />
+        
       </ScrollReveal>
 
       {/* Parallax Divider 2 */}
