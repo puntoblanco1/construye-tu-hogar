@@ -30,8 +30,8 @@ const goldIcon = new L.Icon({
 const content = {
   en: {
     sectionTitle: 'OPPORTUNITIES',
-    heading: 'Explore Property Opportunities',
-    subheading: 'Over 1,700 land parcels and properties across Spain',
+    heading: 'Professional Project Management Firm',
+    subheading: "Save the developer's profit with expert legal and engineering services in Spain",
     searchPlaceholder: 'Search by municipality, address...',
     filterRegion: 'All Regions',
     filterMunicipality: 'All Municipalities',
@@ -54,8 +54,8 @@ const content = {
   },
   es: {
     sectionTitle: 'OPORTUNIDADES',
-    heading: 'Explora Oportunidades Inmobiliarias',
-    subheading: 'M\u00E1s de 1.700 parcelas y propiedades en toda Espa\u00F1a',
+    heading: 'Firma Profesional de Gesti\u00F3n de Proyectos',
+    subheading: 'Ahorra el beneficio del promotor con servicios legales e ingenier\u00EDa experta en Espa\u00F1a',
     searchPlaceholder: 'Buscar por municipio, direcci\u00F3n...',
     filterRegion: 'Todas las Regiones',
     filterMunicipality: 'Todos los Municipios',
@@ -77,9 +77,9 @@ const content = {
     contactAbout: 'Preguntar sobre esta propiedad',
   },
   ar: {
-    sectionTitle: '\u0627\u0644\u0641\u0631\u0635',
-    heading: '\u0627\u0633\u062A\u0643\u0634\u0641 \u0627\u0644\u0641\u0631\u0635 \u0627\u0644\u0639\u0642\u0627\u0631\u064A\u0629',
-    subheading: '\u0623\u0643\u062B\u0631 \u0645\u0646 1,700 \u0642\u0637\u0639\u0629 \u0623\u0631\u0636 \u0648\u0639\u0642\u0627\u0631 \u0641\u064A \u062C\u0645\u064A\u0639 \u0623\u0646\u062D\u0627\u0621 \u0625\u0633\u0628\u0627\u0646\u064A\u0627',
+    sectionTitle: 'الفرص',
+    heading: 'شركة إدارة مشاريع احترافية',
+    subheading: 'وفّر ربح المطور مع خدمات قانونية وهندسية متخصصة في إسبانيا',
     searchPlaceholder: '\u0627\u0628\u062D\u062B \u0628\u0627\u0644\u0628\u0644\u062F\u064A\u0629\u060C \u0627\u0644\u0639\u0646\u0648\u0627\u0646...',
     filterRegion: '\u062C\u0645\u064A\u0639 \u0627\u0644\u0645\u0646\u0627\u0637\u0642',
     filterMunicipality: '\u062C\u0645\u064A\u0639 \u0627\u0644\u0628\u0644\u062F\u064A\u0627\u062A',
@@ -264,7 +264,7 @@ const MapSection = ({ onAuthRequired }) => {
         <div className="text-center mb-10">
           <p className="text-[#d4a650] font-semibold text-sm tracking-widest mb-3">{txt.sectionTitle}</p>
           <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4" data-testid="map-section-heading">{txt.heading}</h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">{txt.subheading}</p>
+          <p className="text-lg text-gray-900 font-bold max-w-3xl mx-auto">{txt.subheading}</p>
         </div>
 
         {/* Search + Filters */}
