@@ -5,16 +5,16 @@ import { useLanguage } from '../context/LanguageContext';
 import { Button } from './ui/button';
 
 const phases = [
-  { src: '/videos/build-phase1.mp4', poster: 'https://images.pexels.com/videos/34786623/pexels-photo-34786623.jpeg?w=1920' },
+  { src: '/videos/build-phase1.mp4', poster: 'https://images.pexels.com/videos/31025072/pexels-photo-31025072.jpeg?w=1920' },
   { src: '/videos/build-phase3.mp4', poster: 'https://images.pexels.com/videos/34289833/building-building-site-cement-civil-engineering-34289833.jpeg?w=1920' },
-  { src: '/videos/build-phase2.mp4', poster: 'https://images.pexels.com/videos/35904584/pexels-photo-35904584.jpeg?w=1920' },
-  { src: '/videos/hero-video.mp4', poster: 'https://images.pexels.com/videos/17224719/architectural-design-architectural-designs-beautiful-home-building-exterior-17224719.jpeg?w=1920' },
+  { src: '/videos/build-phase2.mp4', poster: 'https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?w=1920' },
+  { src: '/videos/hero-video.mp4', poster: 'https://images.pexels.com/photos/2760243/pexels-photo-2760243.jpeg?w=1920' },
 ];
 
 const phaseLabels = {
-  en: ['Foundation & Structure', 'Building Progress', 'Construction Details', 'Your Dream Home'],
-  es: ['Cimentación y Estructura', 'Avance de Obra', 'Detalles de Construcción', 'Tu Casa de Ensueño'],
-  ar: ['الأساسات والهيكل', 'تقدم البناء', 'تفاصيل البناء', 'منزل أحلامك'],
+  en: ['Prefab Assembly', 'Building Progress', 'Module Installation', 'Home Completion'],
+  es: ['Montaje Prefabricado', 'Avance de Obra', 'Instalación de Módulos', 'Casa Terminada'],
+  ar: ['تجميع المبنى الجاهز', 'تقدم البناء', 'تركيب الوحدات', 'المنزل المكتمل'],
 };
 
 const HeroCarousel = () => {
