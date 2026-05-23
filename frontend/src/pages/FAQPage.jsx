@@ -9,6 +9,7 @@ const FAQPage = () => {
   const [openItems, setOpenItems] = useState({});
   const [activeCategory, setActiveCategory] = useState('all');
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const faq = t.faq || {};
 
   const categories = [

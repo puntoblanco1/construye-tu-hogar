@@ -1,4 +1,7 @@
+import notion_routes
+from fastapi import FastAPI
 from fastapi import FastAPI, APIRouter, HTTPException, Response, Request
+from fastapi.staticfiles import StaticFiles
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -247,6 +250,7 @@ async def get_status_checks():
     return status_checks
 
 app.include_router(api_router)
+app.include_router(notion_routes.router, prefix="/api")
 
 app.add_middleware(
     CORSMiddleware,
@@ -259,3 +263,6 @@ app.add_middleware(
 @app.on_event("shutdown")
 async def shutdown_db_client():
     client.close()
+
+# Serve React frontend static files
+app.mount("/", StaticFiles(directory="static", html=True), name="static")

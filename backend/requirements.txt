@@ -135,3 +135,4 @@ websockets==15.0.1
 yarl==1.22.0
 zipp==3.23.0
 zopfli==0.4.1
+notion-client==2.2.1
