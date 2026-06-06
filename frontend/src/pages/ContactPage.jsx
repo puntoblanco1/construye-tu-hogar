@@ -165,7 +165,7 @@ Phone: ${formData.phone}
 Message:
 ${formData.message}`;
     
-    window.open(`mailto:info@construyetuhogar.es?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, '_blank');
+    window.open(`mailto:puntoblancorealestate@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, '_blank');
   };
 
   const openWhatsAppDirect = () => {
@@ -329,7 +329,7 @@ ${formData.message}`;
                 </div>
 
                 <a 
-                  href="mailto:info@construyetuhogar.es"
+                  href="mailto:puntoblancorealestate@gmail.com"
                   className="flex items-start space-x-4 p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors cursor-pointer"
                 >
                   <div className="w-12 h-12 bg-[#d4a650] rounded-full flex items-center justify-center flex-shrink-0">
@@ -337,7 +337,7 @@ ${formData.message}`;
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">{txt.email}</h3>
-                    <p className="text-gray-600">info@construyetuhogar.es</p>
+                    <p className="text-gray-600">puntoblancorealestate@gmail.com</p>
                   </div>
                 </a>
               </div>
