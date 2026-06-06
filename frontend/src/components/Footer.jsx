@@ -99,7 +99,7 @@ const Footer = () => {
               </li>
               <li className={`flex items-center ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'}`}>
                 <Mail className="w-5 h-5 text-[#d4a650] flex-shrink-0" />
-                <span className="text-sm">info@construyetuhogar.es</span>
+                <span className="text-sm">puntoblancorealestate@gmail.com</span>
               </li>
             </ul>
           </div>
