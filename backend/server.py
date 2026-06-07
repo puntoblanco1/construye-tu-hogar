@@ -269,10 +269,12 @@ app.mount("/static", StaticFiles(directory="static/static"), name="static_assets
 app.mount("/videos", StaticFiles(directory="static/videos"), name="videos")
 @app.get("/{full_path:path}", include_in_schema=False)
 async def serve_react(full_path: str, request: Request):
-    # Don't catch API routes
+@app.get("/{full_path:path}", include_in_schema=False)
+async def serve_react(full_path: str, request: Request):
     if full_path.startswith("api/"):
         raise HTTPException(status_code=404)
-    index_path = Path(__file__).parent / "static" / "index.html"
-    if index_path.exists():
-        return FileResponse(str(index_path))
-    raise HTTPException(status_code=404)
+    static_dir = Path(__file__).parent / "static"
+    file_path = static_dir / full_path
+    if file_path.exists() and file_path.is_file():
+        return FileResponse(str(file_path))
+    return FileResponse(str(static_dir / "index.html"))
