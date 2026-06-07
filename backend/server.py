@@ -263,13 +263,12 @@ app.add_middleware(
 @app.on_event("shutdown")
 async def shutdown_db_client():
     client.close()
-
 # Serve React frontend static files
 from fastapi.responses import FileResponse
+
+app.mount("/static", StaticFiles(directory="static/static"), name="static_assets")
 
 @app.get("/{full_path:path}")
 async def serve_react(full_path: str):
     index_path = Path(__file__).parent / "static" / "index.html"
     return FileResponse(index_path)
-
-app.mount("/static", StaticFiles(directory="static/static"), name="static")
