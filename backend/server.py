@@ -266,7 +266,7 @@ async def shutdown_db_client():
 # Serve React frontend static files
 from fastapi.responses import FileResponse
 app.mount("/static", StaticFiles(directory="static/static"), name="static_assets")
-
+app.mount("/videos", StaticFiles(directory="static/videos"), name="videos")
 @app.get("/{full_path:path}", include_in_schema=False)
 async def serve_react(full_path: str, request: Request):
     # Don't catch API routes
